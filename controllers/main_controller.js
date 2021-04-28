@@ -11,11 +11,11 @@ const Log = require('../models/logs.js')
 
 // R1 - INDEX
 router.get('/', (req, res) => {
-    Log.find({}, (err, allProducts) => {
+    Log.find({}, (err, allLogs) => {
         res.render(
-            'pages/index.ejs',
+            'pages/home.ejs',
             {
-                products: allProducts,
+                products: allLogs,
                 currentUser: req.session.currentUser
             }
         )
@@ -34,20 +34,20 @@ router.get('/new', (req, res) => {
 
 //C2 - CREATE
 router.post('/', (req, res) => {
-    Log.create(req.body, (err, newProduct) => {
-        res.redirect('/store/' + newProduct._id)
+    Log.create(req.body, (err, newLog) => {
+        res.redirect('/journal/' + newLog._id)
     })
 })
 
 // R2 - SHOW
-router.get('/:productId', (req, res) => {
+router.get('/:logId', (req, res) => {
     Log.findById(
-        req.params.productId,
-        (err, thisProduct) => {
+        req.params.logId,
+        (err, thisLog) => {
             res.render(
                 'pages/show.ejs',
                 {
-                    product: thisProduct,
+                    log: thisLog,
                     currentUser: req.session.currentUser
                 }
             )
@@ -56,14 +56,14 @@ router.get('/:productId', (req, res) => {
 })
 
 // U1 - EDIT
-router.get('/:productId/edit', (req, res) => {
+router.get('/:logId/edit', (req, res) => {
     Log.findById(
-        req.params.productId,
-        (err, foundProduct) => {
+        req.params.logId,
+        (err, thisLog) => {
             res.render(
                 'pages/edit.ejs',
                 {
-                    product: foundProduct,
+                    log: thisLog,
                     currentUser: req.session.currentUser
                 }
             )
@@ -71,22 +71,22 @@ router.get('/:productId/edit', (req, res) => {
     )
 })
 
-// U2 - UPDATE
-router.put('/:productId', (req, res) => {
-    Log.findByIdAndUpdate(req.params.productId, req.body, (err, thisProduct) => {
-        res.redirect('/store')
+// U2 - UPDATE =================NEED TO CHECK ROUTE; PARSE REQ.BODY?
+router.put('/:logId', (req, res) => {
+    Log.findByIdAndUpdate(req.params.logId, req.body, (err, thisLog) => {
+        res.redirect('/journal/' + req.params.logId)
     })
 })
 
 // DESTROY
-router.delete('/:productId', (req, res) => {
+router.delete('/:logId', (req, res) => {
     Log.findByIdAndRemove(
-        req.params.productId,
-        (err, removedProduct) => {
+        req.params.logId,
+        (err, removedLog) => {
             if (err) {
                 console.log(err)
             } else {
-                console.log(removedProduct + " successfully removed! ==========")
+                console.log(removedLog + " successfully removed! ==========")
                 res.redirect('/store')
             }
         }
@@ -97,21 +97,21 @@ router.delete('/:productId', (req, res) => {
 // ======================================
 // ========== EXTENSION ROUTES ==========
 
-// SEED
-router.get('/seed', (req, res) => {
-    Log.create(seed, (err, seededData) => {
-        console.log(seededData)
-        res.redirect('store')
-    })
-})
+// // SEED
+// router.get('/seed', (req, res) => {
+//     Log.create(seed, (err, seededData) => {
+//         console.log(seededData)
+//         res.redirect('store')
+//     })
+// })
 
-// BUY
-router.put('/:productId/buy', (req, res) => {
-    Log.findById(req.params.productId, (err, thisProduct) => {
-        thisProduct.qty--
-        thisProduct.save()
-        res.redirect('/store/' + req.params.productId)
-    })
-})
+// // BUY
+// router.put('/:productId/buy', (req, res) => {
+//     Log.findById(req.params.productId, (err, thisProduct) => {
+//         thisProduct.qty--
+//         thisProduct.save()
+//         res.redirect('/store/' + req.params.productId)
+//     })
+// })
 
 module.exports = router

@@ -7,7 +7,9 @@ const userSchema = Schema(
         password: { type: String, required: true },
         firstName: { type: String, unique: true, required: true },
         lastName: { type: String, unique: true, required: true },
-        defaultPrivacy: { type: String, required: true } // default to full privacy
+        friends: { type: [String] },
+        defaultFriendsPrivacy: { type: String, required: true }, // Friends share setting: 0 = share nothing, 1 = share only summary, 2 = share full entries. Defaults to 0.
+        defaultGlobalPrivacy: { type: Number, required: true } // Global privacy setting: 0 = share nothing, 1 = share only summary, 2 = share full entries. Defaults to 0.
     }
 )
 

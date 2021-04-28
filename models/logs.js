@@ -6,10 +6,10 @@ const logSchema = new Schema(
         username: { type: String, required: true },
         title: { type: String, required: true },
         moodScale: { type: Number, min: 0, max: 10 },
-        moodWords: { type: [] },
+        moodWords: { type: [String], required: true },
         entry: { type: String },
-        privacy: { type: Number, required: true }
-
+        friendsPrivacy: { type: Number, required: true }, // Friends share setting: 0 = share nothing, 1 = share only summary, 2 = share full entries. Defaults to user setting.
+        globalPrivacy: { type: Number, required: true } // Global privacy setting: 0 = share nothing, 1 = share only summary, 2 = share full entries. Defaults to user setting.
     }
 )
 

@@ -27,8 +27,8 @@ const methodOverride = require('method-override')
 
 // CONTROLLER(S)
 const mainController = require('./controllers/main_controller.js')
-// const usersController = require('./controllers/users_controller.js')
-// const sessionController = require('./controllers/session_controller.js')
+const usersController = require('./controllers/users_controller.js')
+const sessionController = require('./controllers/session_controller.js')
 
 
 // DATABASE
@@ -41,15 +41,14 @@ const db = mongoose.connection
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
-// app.use('/main', mainController)
-// app.use('/users', usersController)
-// app.use('/session', sessionController)
+app.use('/journal', mainController)
+app.use('/users', usersController)
+app.use('/session', sessionController)
 
 // ======================================
 // =========== INDEX REDIRECT ===========
 app.get('/', (req, res) => {
-    res.send('Hello, World!')
-    // res.redirect('/store')
+    res.redirect('/journal')
 })
 
 // ======================================
