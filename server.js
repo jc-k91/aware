@@ -26,9 +26,9 @@ app.use(
 const methodOverride = require('method-override')
 
 // CONTROLLER(S)
-// const mainController = require('./controllers/main_controller.js')
-// const usersController = require('./controllers/users_controller.js')
-// const sessionController = require('./controllers/session_controller.js')
+const mainController = require('./controllers/main_controller.js')
+const usersController = require('./controllers/users_controller.js')
+const sessionController = require('./controllers/session_controller.js')
 
 
 // DATABASE
