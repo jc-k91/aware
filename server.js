@@ -47,9 +47,10 @@ app.use(methodOverride('_method'))
 
 // ======================================
 // =========== INDEX REDIRECT ===========
-// app.get('/', (req, res) => {
-//     res.redirect('/store')
-// })
+app.get('/', (req, res) => {
+    res.send('Hello, World!')
+    // res.redirect('/store')
+})
 
 // ======================================
 // ============ CONNECTIONS =============
