@@ -1,0 +1,79 @@
+// =============DEPENDENCIES=============
+// =================AND==================
+// ==============VARIABLES===============
+
+// DOTENV
+require('dotenv').config()
+
+// EXPRESS
+const express = require('express')
+const app = express()
+const PORT = process.env.PORT ?? 3003
+
+// SESSION
+const session = require('express-session')
+app.use(
+    session(
+        {
+            secret: process.env.SECRET,
+            resave: false,
+            saveUninitialized: false
+        }
+    )
+)
+
+// METHOD OVERRIDE
+const methodOverride = require('method-override')
+
+// CONTROLLER(S)
+// const mainController = require('./controllers/main_controller.js')
+// const usersController = require('./controllers/users_controller.js')
+// const sessionController = require('./controllers/session_controller.js')
+
+
+// DATABASE
+const mongoose = require('mongoose')
+const mongoURI = process.env.MONGODB_URI
+const db = mongoose.connection
+
+// ======================================
+// ============= MIDDLEWARE =============
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
+// app.use('/main', mainController)
+// app.use('/users', usersController)
+// app.use('/session', sessionController)
+
+// ======================================
+// =========== INDEX REDIRECT ===========
+// app.get('/', (req, res) => {
+//     res.redirect('/store')
+// })
+
+// ======================================
+// ============ CONNECTIONS =============
+
+// EXPRESS
+app.listen(PORT, () => {
+    console.log("Unit 2 Project app is listening at port " + PORT);
+})
+
+// DATABASE
+mongoose.connect(
+    mongoURI,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+    },
+    () => {
+        console.log("Connection with mongod established.");
+    }
+)
+
+// =========== ERROR/SUCCESS ============
+// ============== MESSAGES ==============
+db.on('error', (err) => console.log(err.message + '. Is Mongod running?'))
+db.on('connected', () => console.log('Connected to MongoDB at ' + mongoURI))
+db.on('disconnected', () => console.log('Disconnected from MongoDB'))
