@@ -9,11 +9,11 @@ const Log = require('../models/logs.js')
 // ======================================
 // =========== RESTFUL ROUTES ===========
 
-// READ PT 1.1 - HOME
+// READ PT 1.1 - HOME/DASHBOARD
 router.get('/', (req, res) => {
     Log.find({}, (err, allLogs) => {
         res.render(
-            'pages/home.ejs',
+            'pages/dashboard.ejs',
             {
                 products: allLogs,
                 currentUser: req.session.currentUser

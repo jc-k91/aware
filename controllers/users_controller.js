@@ -11,7 +11,7 @@ const User = require('../models/users.js')
 // ======================================
 // =============== ROUTES ===============
 // CREATE PT 1 - NEW
-users.get('/create', (req, res) => {
+users.get('/register', (req, res) => {
     res.render('users/register.ejs')
 })
 

@@ -1,0 +1,25 @@
+<header>
+    <h1>AWARE</h1>
+    <% if (!currentUser) { %>
+        <div class="sign-in">
+            <a class="header-link" href="/session/sign-in">Sign In</a>
+        </div>
+        <div class="partition"></div>
+        <div class="register">
+            <a class="header-link" href="/users/register">Register</a>
+        </div>
+    <% } else { %>
+        <div class="account">
+            <p>Hello, <%= currentUser.name %> </p>
+            <a class="header-link" href="/session/sign-in">Sign In</a>
+        </div>
+            <div class="partition"></div>
+        <div class="sign-out">
+            <form action="/session?_method=DELETE" method="POST">
+                <input class="header-link" type="submit" value="Sign Out">
+            </form>
+        </div>
+    <% } %>
+    <%  %>
+    v
+</header>

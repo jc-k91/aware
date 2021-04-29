@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head.ejs') %>
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+    <div class="container">
+        <h1>Sign In</h1>
+        <form action="/session" method="POST">
+            <!-- username -->
+            <label for="username"></label>
+            <input class="input-textbox" type="text" name="username">
+            <!-- password -->
+            <label for="password"></label>
+            <input class="input-textbox" type="password" name="password">
+            <!-- sign in button -->
+            <input class="button cta" id="sign-in-button" type="submit" value="Sign In">
+        </form>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

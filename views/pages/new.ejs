@@ -7,32 +7,34 @@
 <body>
     <%- include('../partials/header.ejs') %>
 
-    <form action="/">
-        <!-- username -->
-        <input type="hidden" name="username" value="<%= currentUser.username %>">
-        <!-- title -->
-        <input type="text" name="title" id="#####">
-        <!-- moodScale -->
-        <input class="slider" type="range" name="moodScale"  id="#####" min="1" max="10" value="5" required>
-        <!-- moodWords -->
-        <input type="text" name="moodWords" id="#####" required>
-        <!-- entry -->
-        <textarea name="entry" id="#####"></textarea>
-        <!-- friendsPrivacy -->
-        <select name="friendsPrivacy" id="" required>
-            <option value="0" <% if (currentUser.friendsPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
-            <option value="1" <% if (currentUser.friendsPrivacy == 1 ) { %>selected<% } %>>Only summary</option>
-            <option value="2" <% if (currentUser.friendsPrivacy == 2 ) { %>selected<% } %>>Full entry</option>
-        </select>
-        <!-- globalPrivacy -->
-        <select name="globalPrivacy" id="" required>
-            <option value="0" <% if (currentUser.globalPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
-            <option value="1" <% if (currentUser.globalPrivacy == 1 ) { %>selected<% } %>>Only summary</option>
-            <option value="2" <% if (currentUser.globalPrivacy == 2 ) { %>selected<% } %>>Full entry</option>
-        </select>
-        <!-- submit button -->
-        <input type="submit">
-    </form>
+    <div class="container">
+        <form action="/">
+            <!-- HIDDEN username -->
+            <input type="hidden" name="username" value="<%= currentUser.username %>">
+            <!-- title -->
+            <input class="input-textbox" type="text" name="title" id="title-textbox" value="">
+            <!-- moodScale -->
+            <input class="slider" type="range" name="moodScale"  id="moodScale-slider" min="1" max="10" value="5" required>
+            <!-- moodWords -->
+            <input class="input-textbox" type="text" name="moodWords" id="moodWords-textbox" required>
+            <!-- entry -->
+            <textarea class="input-textbox" name="entry" id="entry-textbox"></textarea>
+            <!-- friendsPrivacy -->
+            <select class="dropdown" name="friendsPrivacy" required>
+                <option value="0" <% if (currentUser.friendsPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
+                <option value="1" <% if (currentUser.friendsPrivacy == 1 ) { %>selected<% } %>>Only summary</option>
+                <option value="2" <% if (currentUser.friendsPrivacy == 2 ) { %>selected<% } %>>Full entry</option>
+            </select>
+            <!-- globalPrivacy -->
+            <select class="dropdown" name="globalPrivacy" required>
+                <option value="0" <% if (currentUser.globalPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
+                <option value="1" <% if (currentUser.globalPrivacy == 1 ) { %>selected<% } %>>Only summary</option>
+                <option value="2" <% if (currentUser.globalPrivacy == 2 ) { %>selected<% } %>>Full entry</option>
+            </select>
+            <!-- submit button -->
+            <input class="button cta" type="submit">
+        </form>
+    </div>
 
     <%- include('../partials/footer.ejs') %>
 </body>
