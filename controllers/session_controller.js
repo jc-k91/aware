@@ -12,7 +12,12 @@ const User = require('../models/users.js')
 // =============== ROUTES ===============
 // NEW SESSION - NEW
 sessions.get('/sign-in', (req, res) => {
-    res.render('session/sign-in.ejs')
+    res.render(
+        'session/sign-in.ejs',
+        {
+            currentUser: req.session.currentUser
+        }
+    )
 })
 
 // NEW SESSION - CREATE
