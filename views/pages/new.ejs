@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head.ejs') %>
+    <title>Aware: New Entry</title>
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+
+    <form action="/">
+        <!-- username -->
+        #####################
+        <!-- title -->
+        <input type="text" name="title" id="#####">
+        <!-- moodScale -->
+        <input class="slider" type="range" name="moodScale"  id="#####" min="1" max="10" value="5">
+        <!-- moodWords -->
+        <input type="text" name="moodWords" id="#####">
+        <!-- entry -->
+        <textarea name="entry" id="" cols="30" rows="10"></textarea>
+        <!-- friendsPrivacy -->
+        <select name="friendsPrivacy" id="">
+            <option value="0" <% if (currentUser.friendsPrivacy === 0 ) { %>selected<% } %>>Don't share</option>
+            <option value="1" <% if (currentUser.friendsPrivacy === 1 ) { %>selected<% } %>>Only summary</option>
+            <option value="2" <% if (currentUser.friendsPrivacy === 2 ) { %>selected<% } %>>Full entry</option>
+        </select>
+        <!-- globalPrivacy -->
+        <select name="globalPrivacy" id="">
+            <option value="0" <% if (currentUser.globalPrivacy === 0 ) { %>selected<% } %>>Don't share</option>
+            <option value="1" <% if (currentUser.globalPrivacy === 1 ) { %>selected<% } %>>Only summary</option>
+            <option value="2" <% if (currentUser.globalPrivacy === 2 ) { %>selected<% } %>>Full entry</option>
+        </select>
+    </form>
+
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>
