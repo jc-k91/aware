@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head.ejs') %>
+    <title>Document</title>
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+
+    <form action="index.html" method="post">
+        <!-- username -->
+        <input type="text" name="username" placeholder="Username" required>
+        <!-- password -->
+        <input type="text" name="password" placeholder="Password" required>
+        <!-- firstName -->
+        <input type="text" name="firstName" placeholder="First Name" required>
+        <!-- lastName -->
+        <input type="text" name="lastName" placeholder="Last Name" required>
+        <!-- defaultFriendsPrivacy -->
+        <input type="hidden" name="defaultFriendsPrivacy" value="0">
+        <!-- defaultGlobalPrivacy -->
+        <input type="hidden" name="defaultGlobalPrivacy" value="0">
+    </form>
+
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

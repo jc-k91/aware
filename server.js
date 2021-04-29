@@ -30,7 +30,6 @@ const mainController = require('./controllers/main_controller.js')
 const usersController = require('./controllers/users_controller.js')
 const sessionController = require('./controllers/session_controller.js')
 
-
 // DATABASE
 const mongoose = require('mongoose')
 const mongoURI = process.env.MONGODB_URI
@@ -66,6 +65,7 @@ mongoose.connect(
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
+        useCreateIndex: true,
     },
     () => {
         console.log("Connection with mongod established.");
