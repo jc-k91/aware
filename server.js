@@ -27,7 +27,7 @@ const methodOverride = require('method-override')
 
 // CONTROLLERS
 const mainController = require('./controllers/main_controller.js')
-const usersControlle r = require('./controllers/users_controller.js')
+const usersController = require('./controllers/users_controller.js')
 const sessionController = require('./controllers/session_controller.js')
 
 // DATABASE
