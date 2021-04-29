@@ -30,6 +30,8 @@
             <option value="1" <% if (currentUser.globalPrivacy == 1 ) { %>selected<% } %>>Only summary</option>
             <option value="2" <% if (currentUser.globalPrivacy == 2 ) { %>selected<% } %>>Full entry</option>
         </select>
+        <!-- submit button -->
+        <input type="submit">
     </form>
 
     <%- include('../partials/footer.ejs') %>

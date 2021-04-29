@@ -8,18 +8,20 @@
     <%- include('../partials/header.ejs') %>
 
     <form action="index.html" method="post">
-        <!-- username -->
+        <!-- HIDDEN username -->
         <input type="text" name="username" placeholder="Username" required>
         <!-- password -->
-        <input type="text" name="password" placeholder="Password" required>
+        <input type="password" name="password" placeholder="Password" required>
         <!-- firstName -->
         <input type="text" name="firstName" placeholder="First Name" required>
         <!-- lastName -->
         <input type="text" name="lastName" placeholder="Last Name" required>
-        <!-- defaultFriendsPrivacy -->
+        <!-- HIDDEN defaultFriendsPrivacy -->
         <input type="hidden" name="defaultFriendsPrivacy" value="0">
-        <!-- defaultGlobalPrivacy -->
+        <!-- HIDDEN defaultGlobalPrivacy -->
         <input type="hidden" name="defaultGlobalPrivacy" value="0">
+        <!-- submit button -->
+        <input type="submit">
     </form>
 
     <%- include('../partials/footer.ejs') %>
