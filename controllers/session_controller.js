@@ -32,7 +32,7 @@ sessions.post('/', (req, res) => {
                 res.send('Sorry, username not found. <a href="/">Go back</a>')
             } else {
                 if (bcrypt.compareSync(req.body.password, foundUser.password)) {
-                    console.log(req.session);
+                    console.log('USER SESSION CREATED FOR ' + req.body.username + " =============================");
                     req.session.currentUser = foundUser
                     res.redirect('/')
                 } else {

@@ -8,7 +8,7 @@
     <%- include('../partials/header.ejs') %>
 
     <div class="container">
-        <form action="/">
+        <form action="/journal" method="POST">
             <!-- HIDDEN username -->
             <input type="hidden" name="username" value="<%= currentUser.username %>">
             <!-- title -->

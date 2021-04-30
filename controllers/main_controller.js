@@ -80,6 +80,7 @@ router.put('/:logId', (req, res) => {
 
 // DESTROY - RESTFUL
 router.delete('/:logId', (req, res) => {
+    console.log(req.params.logId)
     Log.findByIdAndRemove(
         req.params.logId,
         (err, removedLog) => {
@@ -87,7 +88,7 @@ router.delete('/:logId', (req, res) => {
                 console.log(err)
             } else {
                 console.log(removedLog + " successfully removed! ==========")
-                res.redirect('/store')
+                res.redirect('/dash')
             }
         }
     )

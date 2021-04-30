@@ -50,7 +50,7 @@ app.use('/session', sessionController)
 // ======================================
 // ========== HOME / REDIRECT ===========
 // HOME DASH
-app.get('/dashboard', (req, res) => {
+app.get('/dash', (req, res) => {
     Log.find({}, (err, allLogs) => {
         res.render(
             'pages/dashboard.ejs',
@@ -64,7 +64,7 @@ app.get('/dashboard', (req, res) => {
 
 // REDIRECT
 app.get('/', (req, res) => {
-    res.redirect('/dashboard')
+    res.redirect('/dash')
 })
 
 // ======================================
