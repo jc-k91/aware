@@ -11,10 +11,10 @@
             </div>
         <% } else { %>
             <div class="account">
-                <p>Hello, <%= currentUser.name %> </p>
-                <a class="link header-link" href="/session/sign-in">Sign In</a>
+                <p>Hello, <%= currentUser.firstName %></p>
+                <a class="link header-link" href="/users/edit">Settings</a>
             </div>
-                <div class="partition"></div>
+            <div class="partition"></div>
             <div class="sign-out">
                 <form action="/session?_method=DELETE" method="POST">
                     <input class="link header-link" type="submit" value="Sign Out">

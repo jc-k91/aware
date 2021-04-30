@@ -16,6 +16,12 @@ header h1 {
 
 #header-links-container {
     display: flex;
+    align-items: center;
+}
+
+.account {
+    display: flex;
+    align-items: center;
 }
 
 .header-link {
@@ -23,6 +29,7 @@ header h1 {
 }
 
 header .partition {
+    height: 1.5em;
     border-left: 1px solid black;
     margin: 0 .25rem;
 }

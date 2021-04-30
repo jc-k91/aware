@@ -7,22 +7,22 @@ const Log = require('../models/logs.js')
 // const seed = require('../models/seed.js')
 
 // ======================================
-// =========== RESTFUL ROUTES ===========
+// =============== ROUTES ===============
 
-// READ PT 1.1 - HOME/DASHBOARD
-router.get('/', (req, res) => {
+// READ PT 1 - INDEX - RESTFUL
+router.get('/index', (req, res) => {
     Log.find({}, (err, allLogs) => {
         res.render(
-            'pages/dashboard.ejs',
+            'pages/index.ejs',
             {
-                products: allLogs,
+                logs: allLogs,
                 currentUser: req.session.currentUser
             }
         )
     })
 })
 
-// CREATE LOG PT 1 - NEW
+// CREATE LOG PT 1 - NEW - RESTFUL
 router.get('/new', (req, res) => {
     res.render(
         'pages/new.ejs',
@@ -32,14 +32,14 @@ router.get('/new', (req, res) => {
     )
 })
 
-// CREATE LOG PT 2 - CREATE
+// CREATE LOG PT 2 - CREATE - RESTFUL
 router.post('/', (req, res) => {
     Log.create(req.body, (err, newLog) => {
         res.redirect('/journal/' + newLog._id)
     })
 })
 
-// READ PT 2 - SHOW
+// READ PT 2 - SHOW - RESTFUL
 router.get('/:logId', (req, res) => {
     Log.findById(
         req.params.logId,
@@ -55,7 +55,7 @@ router.get('/:logId', (req, res) => {
     )
 })
 
-// UPDATE PT 1 - EDIT
+// UPDATE PT 1 - EDIT - RESTFUL
 router.get('/:logId/edit', (req, res) => {
     Log.findById(
         req.params.logId,
@@ -71,14 +71,14 @@ router.get('/:logId/edit', (req, res) => {
     )
 })
 
-// UPDATE PT 2 - UPDATE =================NEED TO CHECK ROUTE; PARSE REQ.BODY?
+// UPDATE PT 2 - UPDATE - RESTFUL =================NEED TO CHECK ROUTE; PARSE REQ.BODY?
 router.put('/:logId', (req, res) => {
     Log.findByIdAndUpdate(req.params.logId, req.body, (err, thisLog) => {
         res.redirect('/journal/' + req.params.logId)
     })
 })
 
-// DESTROY
+// DESTROY - RESTFUL
 router.delete('/:logId', (req, res) => {
     Log.findByIdAndRemove(
         req.params.logId,
@@ -93,9 +93,7 @@ router.delete('/:logId', (req, res) => {
     )
 })
 
-
-// ======================================
-// ========== EXTENSION ROUTES ==========
+module.exports = router
 
 // // SEED
 // router.get('/seed', (req, res) => {
@@ -113,5 +111,3 @@ router.delete('/:logId', (req, res) => {
 //         res.redirect('/store/' + req.params.productId)
 //     })
 // })
-
-module.exports = router

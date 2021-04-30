@@ -12,7 +12,12 @@ const User = require('../models/users.js')
 // =============== ROUTES ===============
 // CREATE PT 1 - NEW
 users.get('/register', (req, res) => {
-    res.render('users/register.ejs')
+    res.render(
+        'users/register.ejs',
+        {
+            currentUser: req.session.currentUser
+        }
+    )
 })
 
 // CREATE PT 2 - CREATE =================NEED TO CHECK ROUTE; PARSE REQ.BODY?
@@ -31,18 +36,15 @@ users.post('/', (req, res) => {
 })
 
 // UPDATE PT 1 - EDIT
-users.get('/:username/edit', (req, res) => {
-
-    User.findOne({ username: req.params.username }, (err, thisUser) => {
-        if (req.session.currentUser === thisUser) {
-            res.render(
-                'users/user-settings.ejs',
-                {
-                    user: thisUser,
-                    currentUser: req.session.currentUser
-                }
-            )
-        }
+users.get('/edit', (req, res) => {
+    User.findById(req.session.currentUser._id, (err, thisUser) => {
+        res.render(
+            'users/user-settings.ejs',
+            {
+                user: thisUser,
+                currentUser: req.session.currentUser
+            }
+        )
     })
 })
 

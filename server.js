@@ -35,19 +35,36 @@ const mongoose = require('mongoose')
 const mongoURI = process.env.MONGODB_URI
 const db = mongoose.connection
 
+// MISC
+const Log = require('./models/logs.js')
+
 // ======================================
 // ============= MIDDLEWARE =============
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
-app.use('/journal', mainController)
+app.use('/journal', mainController) // MUST BE LOGGED IN TO ACCESS
 app.use('/users', usersController)
 app.use('/session', sessionController)
 
 // ======================================
-// =========== HOME REDIRECT ============
+// ========== HOME / REDIRECT ===========
+// HOME DASH
+app.get('/dashboard', (req, res) => {
+    Log.find({}, (err, allLogs) => {
+        res.render(
+            'pages/dashboard.ejs',
+            {
+                logs: allLogs,
+                currentUser: req.session.currentUser
+            }
+        )
+    })
+})
+
+// REDIRECT
 app.get('/', (req, res) => {
-    res.redirect('/journal')
+    res.redirect('/dashboard')
 })
 
 // ======================================
