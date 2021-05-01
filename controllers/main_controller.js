@@ -25,7 +25,7 @@ router.get('/index', (req, res) => {
 // CREATE LOG PT 1 - NEW - RESTFUL
 router.get('/new', (req, res) => {
     res.render(
-        'pages/new.ejs',
+        'pages/new-log.ejs',
         {
             currentUser: req.session.currentUser
         }
@@ -34,6 +34,7 @@ router.get('/new', (req, res) => {
 
 // CREATE LOG PT 2 - CREATE - RESTFUL
 router.post('/', (req, res) => {
+    req.body.moodWords = req.body.moodWords.split(', ')
     Log.create(req.body, (err, newLog) => {
         res.redirect('/journal/' + newLog._id)
     })
@@ -73,6 +74,7 @@ router.get('/:logId/edit', (req, res) => {
 
 // UPDATE PT 2 - UPDATE - RESTFUL =================NEED TO CHECK ROUTE; PARSE REQ.BODY?
 router.put('/:logId', (req, res) => {
+    req.body.moodWords = req.body.moodWords.split(', ')
     Log.findByIdAndUpdate(req.params.logId, req.body, (err, thisLog) => {
         res.redirect('/journal/' + req.params.logId)
     })

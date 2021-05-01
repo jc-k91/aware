@@ -8,6 +8,38 @@
     <div class="container">
         <h1>Edit</h1>
         <%= log %>
+        <form action="/journal/<%= log._id %>?_method=PUT" method="POST">
+            <!-- HIDDEN username -->
+                <input type="hidden" name="username" value="<%= currentUser.username %>">
+            <!-- title -->
+            <label for="title">Entry Title</label>
+                <input class="input-textbox" type="text" name="title" id="title-textbox" value="<%= log.title %>">
+            <!-- moodScale -->
+            <label for="moodScale">Mood</label>
+                <input class="slider" type="range" name="moodScale"  id="moodScale-slider" min="1" max="10" value="log.moodScale" required>
+            <!-- moodWords -->
+            <label for="moodWords">Tags</label>
+                <input class="input-textbox" type="text" name="moodWords" id="moodWords-textbox" value="<%= log.moodWords.join(', ') %>" required>
+            <!-- entry -->
+            <label for="entry">Journal Entry</label>
+                <textarea class="input-textbox" name="entry" id="entry-textbox"><%= log.entry %></textarea>
+            <!-- friendsPrivacy -->
+            <label for="friendsPrivacy">Sharing Options: Friends</label>
+                <select class="dropdown" name="friendsPrivacy" required>
+                    <option value="0" <% if (log.friendsPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
+                    <option value="1" <% if (log.friendsPrivacy == 1 ) { %>selected<% } %>>Only summary</option>
+                    <option value="2" <% if (log.friendsPrivacy == 2 ) { %>selected<% } %>>Full entry</option>
+                </select>
+            <!-- globalPrivacy -->
+            <label for="globalPrivacy">Sharing Options: Global</label>
+                <select class="dropdown" name="globalPrivacy" required>
+                    <option value="0" <% if (log.globalPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
+                    <option value="1" <% if (log.globalPrivacy == 1 ) { %>selected<% } %>>Only summary</option>
+                    <option value="2" <% if (log.globalPrivacy == 2 ) { %>selected<% } %>>Full entry</option>
+                </select>
+            <!-- submit button -->
+            <input class="button cta" type="submit">
+        </form>
     </div>
     <%- include('../partials/footer.ejs') %>
 </body>

@@ -8,25 +8,26 @@
     <%- include('../partials/header.ejs') %>
 
     <div class="container">
+        <h1>Register</h1>
         <form action="/users" method="post">
             <!-- username -->
             <label for="username">Username</label>
-            <input class="input-textbox" type="text" name="username" id="username-textbox" placeholder="Username" required><br/>
+                <input class="input-textbox" type="text" name="username" id="username-textbox" placeholder="Username" required><br/>
             <!-- password -->
             <label for="password">Password</label>
-            <input class="input-textbox" type="password" name="password" id="password-textbox" placeholder="Password" required><br/>
+                <input class="input-textbox" type="password" name="password" id="password-textbox" placeholder="Password" required><br/>
             <!-- firstName -->
             <label for="firstName">First Name</label>
-            <input class="input-textbox" type="text" name="firstName" id="firstName-textbox" placeholder="First Name" required><br/>
+                <input class="input-textbox" type="text" name="firstName" id="firstName-textbox" placeholder="First Name" required><br/>
             <!-- lastName -->
             <label for="lastName">Last Name</label>
-            <input class="input-textbox" type="text" name="lastName" id="lastName-textbox" placeholder="Last Name" required><br/>
+                <input class="input-textbox" type="text" name="lastName" id="lastName-textbox" placeholder="Last Name" required><br/>
             <!-- HIDDEN defaultFriendsPrivacy -->
-            <input type="hidden" name="defaultFriendsPrivacy" value="0">
+                <input type="hidden" name="defaultFriendsPrivacy" value="0">
             <!-- HIDDEN defaultGlobalPrivacy -->
-            <input type="hidden" name="defaultGlobalPrivacy" value="0">
+                <input type="hidden" name="defaultGlobalPrivacy" value="0">
             <!-- submit button -->
-            <input class="button cta" type="submit">
+                <input class="button cta" type="submit">
         </form>
     </div>
 
