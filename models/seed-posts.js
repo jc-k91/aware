@@ -7,7 +7,6 @@ for (let i = 0; i < 5; i++) {
     log.moodScale = Math.floor(Math.random() * 10)
     log.moodWords = ["tag 1", "tag 2"]
     log.entry = "This is a test entry"
-    log.friendsPrivacy = Math.floor(Math.random() * 3)
     log.globalPrivacy = Math.floor(Math.random() * 3)
     seedPosts.push(log)
 }

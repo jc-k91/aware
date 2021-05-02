@@ -8,7 +8,6 @@ const userSchema = Schema(
         firstName: { type: String, required: true },
         lastName: { type: String, required: true },
         friends: { type: [String], default: [""] },
-        defaultFriendsPrivacy: { type: Number, required: true, default: 0 }, // Friends share setting: 0 = share nothing, 1 = share only summary, 2 = share full entries. Defaults to 0.
         defaultGlobalPrivacy: { type: Number, required: true, default: 0 } // Global privacy setting: 0 = share nothing, 1 = share only summary, 2 = share full entries. Defaults to 0.
     }
 )

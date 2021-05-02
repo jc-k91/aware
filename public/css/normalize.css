@@ -6,8 +6,15 @@
  *    user zoom.
  */
 
+/* Colors */
+:root {
+    --dark-blue: #074EE8;
+    --light-blue: #E0EAFF;
+    --accent-blue: #053DB5;
+}
+
 html {
-  font-family: sans-serif; /* 1 */
+  font-family: "Roboto", sans-serif; /* 1 */
   -ms-text-size-adjust: 100%; /* 2 */
   -webkit-text-size-adjust: 100%; /* 2 */
 }

@@ -8,7 +8,6 @@ const logSchema = new Schema(
         moodScale: { type: Number, min: 0, max: 10 },
         moodWords: { type: [String], required: true },
         entry: { type: String },
-        friendsPrivacy: { type: Number, required: true }, // Friends share setting: 0 = share nothing, 1 = share only summary, 2 = share full entries. Defaults to user setting.
         globalPrivacy: { type: Number, required: true } // Global privacy setting: 0 = share nothing, 1 = share only summary, 2 = share full entries. Defaults to user setting.
     },
     {

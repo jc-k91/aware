@@ -10,6 +10,7 @@ const Log = require('../models/logs.js')
 const kronos = () => {
     return new Date(Date.now())
 }
+const months = [ null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 // ======================================
 // =============== ROUTES ===============
@@ -109,6 +110,7 @@ router.get('/dash', (req, res) => {
             {
                 logs: allLogs,
                 date: kronos().toLocaleDateString("en-US").split('/'),
+                months: months,
                 currentUser: req.session.currentUser
             }
         )

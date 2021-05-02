@@ -6,7 +6,6 @@
     top: 7rem;
     min-height: calc(100vh - 12.5rem);
     overflow-y: scroll;
-    border: 1px solid black;
 }
 
 .content-container {
@@ -15,5 +14,5 @@
     justify-content: flex-start;
     align-items: center;
     width: 75%;
-    border: 1px solid green;
+    overflow-x: visible
 }
