@@ -6,10 +6,10 @@
 </head>
 <body>
     <div class="container">
+        <div class="app-name-container">
+            <h1>AWARE APP</h1>
+        </div>
         <div class="content-container">
-            <div class="app-name-container">
-                <h1>AWARE APP</h1>
-            </div>
             <div class="page-title-container">
                 <h3>Sign In</h3>
             </div>
@@ -22,22 +22,22 @@
                     <!-- username -->
                     <fieldset>
                         <legend>Username</legend>
-                            <input class="input-textbox u-full-width" type="text" name="username"><br/>
+                            <input class="input-textbox u-full-width" type="text" name="username">
                     </fieldset>
                     <!-- password -->
                     <fieldset class="form-last">
                         <legend>Password</legend>
-                            <input class="input-textbox u-full-width" type="password" name="password"><br/>
+                            <input class="input-textbox u-full-width" type="password" name="password">
                     </fieldset>
                     <!-- sign in button -->
                     <div class="button-container">
                         <input class="button button-primary u-full-width" type="submit" value="Sign In">
                         <a class="button u-full-width" href="/users/new">Create Account</a>
+                        <a class="button u-full-width" href="/">Cancel</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <%- include('../partials/footer.ejs') %>
 </body>
 </html>

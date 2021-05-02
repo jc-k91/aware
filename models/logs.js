@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const logSchema = new Schema(
     {
         username: { type: String, required: true },
-        title: { type: String, required: true },
+        title: { type: String, unique: true, required: true },
         moodScale: { type: Number, min: 0, max: 10 },
         moodWords: { type: [String], required: true },
         entry: { type: String },

@@ -12,12 +12,11 @@ const User = require('../models/users.js')
 // =============== ROUTES ===============
 // CREATE PT 1 - NEW
 users.get('/new', (req, res) => {
-    res.render(
-        'users/create.ejs',
-        {
-            currentUser: req.session.currentUser
-        }
-    )
+    if (!req.session.currentUser) {
+        res.render('users/create.ejs')
+    } else {
+        res.redirect('/journal/dash')
+    }
 })
 
 // CREATE PT 2 - CREATE =================NEED TO CHECK ROUTE; PARSE REQ.BODY?
@@ -37,15 +36,19 @@ users.post('/', (req, res) => {
 
 // UPDATE PT 1 - EDIT
 users.get('/edit', (req, res) => {
-    User.findById(req.session.currentUser._id, (err, thisUser) => {
-        res.render(
-            'users/user-settings.ejs',
-            {
-                user: thisUser,
-                currentUser: req.session.currentUser
-            }
-        )
-    })
+    if (!req.session.currentUser) {
+        res.render('/')
+    } else {
+        User.findById(req.session.currentUser._id, (err, thisUser) => {
+            res.render(
+                'users/user-settings.ejs',
+                {
+                    user: thisUser,
+                    currentUser: req.session.currentUser
+                }
+            )
+        })
+    }
 })
 
 // UPDATE PT 2 - UPDATE
