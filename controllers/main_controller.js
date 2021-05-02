@@ -23,7 +23,7 @@ router.get('/index', (req, res) => {
 })
 
 // CREATE LOG PT 1 - NEW - RESTFUL
-router.get('/new', (req, res) => {
+router.get('/entry/new', (req, res) => {
     res.render(
         'pages/new-log.ejs',
         {
@@ -33,7 +33,7 @@ router.get('/new', (req, res) => {
 })
 
 // CREATE LOG PT 2 - CREATE - RESTFUL
-router.post('/', (req, res) => {
+router.post('/entry', (req, res) => {
     req.body.moodWords = req.body.moodWords.split(', ')
     Log.create(req.body, (err, newLog) => {
         res.redirect('/journal/' + newLog._id)
@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
 })
 
 // READ PT 2 - SHOW - RESTFUL
-router.get('/:logId', (req, res) => {
+router.get('/entry/:logId', (req, res) => {
     Log.findById(
         req.params.logId,
         (err, thisLog) => {
@@ -57,7 +57,7 @@ router.get('/:logId', (req, res) => {
 })
 
 // UPDATE PT 1 - EDIT - RESTFUL
-router.get('/:logId/edit', (req, res) => {
+router.get('/entry/:logId/edit', (req, res) => {
     Log.findById(
         req.params.logId,
         (err, thisLog) => {
@@ -73,7 +73,7 @@ router.get('/:logId/edit', (req, res) => {
 })
 
 // UPDATE PT 2 - UPDATE - RESTFUL =================NEED TO CHECK ROUTE; PARSE REQ.BODY?
-router.put('/:logId', (req, res) => {
+router.put('/entry/:logId', (req, res) => {
     req.body.moodWords = req.body.moodWords.split(', ')
     Log.findByIdAndUpdate(req.params.logId, req.body, (err, thisLog) => {
         res.redirect('/journal/' + req.params.logId)
@@ -81,7 +81,7 @@ router.put('/:logId', (req, res) => {
 })
 
 // DESTROY - RESTFUL
-router.delete('/:logId', (req, res) => {
+router.delete('/entry/:logId', (req, res) => {
     console.log(req.params.logId)
     Log.findByIdAndRemove(
         req.params.logId,
@@ -90,10 +90,23 @@ router.delete('/:logId', (req, res) => {
                 console.log(err)
             } else {
                 console.log(removedLog + " successfully removed! ==========")
-                res.redirect('/dash')
+                res.redirect('/journal/dash')
             }
         }
     )
+})
+
+// HOME DASH
+router.get('/dash', (req, res) => {
+    Log.find({}, (err, allLogs) => {
+        res.render(
+            'pages/dashboard.ejs',
+            {
+                logs: allLogs,
+                currentUser: req.session.currentUser
+            }
+        )
+    })
 })
 
 module.exports = router

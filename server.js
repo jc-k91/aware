@@ -49,22 +49,14 @@ app.use('/session', sessionController)
 
 // ======================================
 // ========== HOME / REDIRECT ===========
-// HOME DASH
-app.get('/dash', (req, res) => {
-    Log.find({}, (err, allLogs) => {
-        res.render(
-            'pages/dashboard.ejs',
-            {
-                logs: allLogs,
-                currentUser: req.session.currentUser
-            }
-        )
-    })
-})
 
-// REDIRECT
+// LANDING
 app.get('/', (req, res) => {
-    res.redirect('/dash')
+    if (!req.session.currentUser) {
+        res.render('pages/landing.ejs')
+    } else {
+        res.redirect('/journal/dash')
+    }
 })
 
 // ======================================

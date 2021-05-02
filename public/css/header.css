@@ -1,6 +1,6 @@
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     position: relative;
     width: 100%;
@@ -11,7 +11,6 @@ header {
 
 header h1 {
     margin: 0;
-    margin-left: 1.5rem;
 }
 
 #header-links-container {

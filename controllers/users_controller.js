@@ -11,9 +11,9 @@ const User = require('../models/users.js')
 // ======================================
 // =============== ROUTES ===============
 // CREATE PT 1 - NEW
-users.get('/register', (req, res) => {
+users.get('/new', (req, res) => {
     res.render(
-        'users/register.ejs',
+        'users/create.ejs',
         {
             currentUser: req.session.currentUser
         }

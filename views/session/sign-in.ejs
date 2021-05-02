@@ -2,21 +2,38 @@
 <html lang="en">
 <head>
     <%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/landing.css">
 </head>
 <body>
-    <%- include('../partials/header.ejs') %>
     <div class="container">
-        <h1>Sign In</h1>
-        <form action="/session" method="POST">
-            <!-- username -->
-            <label for="username">Username</label>
-            <input class="input-textbox" type="text" name="username"><br/>
-            <!-- password -->
-            <label for="password">Password</label>
-            <input class="input-textbox" type="password" name="password"><br/>
-            <!-- sign in button -->
-            <input class="button cta" id="sign-in-button" type="submit" value="Sign In">
-        </form>
+        <div class="content-container">
+            <div class="app-name-container">
+                <h1>AWARE APP</h1>
+            </div>
+            <div class="page-title-container">
+                <h3>Sign In</h3>
+            </div>
+            <div class="form-container">
+                <form action="/session" method="POST">
+
+                    <!-- username -->
+                    <fieldset>
+                        <legend>Username</legend>
+                            <input class="input-textbox u-full-width" type="text" name="username"><br/>
+                    </fieldset>
+                    <!-- password -->
+                    <fieldset>
+                        <legend>Password</legend>
+                            <input class="input-textbox u-full-width" type="password" name="password"><br/>
+                    </fieldset>
+                    <!-- sign in button -->
+                    <div class="button-container">
+                        <a class="button button-primary u-full-width" href="/session/sign-in">Sign In</a>
+                        <a class="button u-full-width" href="/users/new">Create Account</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <%- include('../partials/footer.ejs') %>
 </body>
