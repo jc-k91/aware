@@ -25,16 +25,17 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 4vh;
 }
 
 .image-large {
     width: 100%;
-    height: 50%;
+    height: 40%;
 }
 
 .image-small {
     width: 100%;
-    height: 25%;
+    height: 15%;
 }
 
 .hero-image-container > img {
@@ -46,8 +47,15 @@ fieldset {
     margin: 0;
 }
 
+input[type=text], input[type=password] {
+    margin-bottom: .5em;
+}
+
+.form-last {
+    margin-bottom: 3vh;
+}
+
 .button-container {
     width: 100%;
-    padding-top: 4vh;
     box-sizing: border-box;
 }
