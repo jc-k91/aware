@@ -4,11 +4,19 @@
     <%- include('../partials/head.ejs') %>
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/session.css">
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
     <div class="container">
-        <h1>Dashboard</h1>
+        <div class="content-container">
+            <div class="dash-date">
+                <%= date %>
+            </div>
+            <div class="entry-list-today">
+
+            </div>
+        </div>
     </div>
     <%- include('../partials/footer.ejs') %>
 </body>

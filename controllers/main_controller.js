@@ -6,6 +6,11 @@ const router = express.Router()
 const Log = require('../models/logs.js')
 // const seed = require('../models/seed.js')
 
+// VARIABLES AND FUNCTIONS
+const kronos = () => {
+    return new Date(Date.now())
+}
+
 // ======================================
 // =============== ROUTES ===============
 
@@ -103,6 +108,7 @@ router.get('/dash', (req, res) => {
             'pages/dashboard.ejs',
             {
                 logs: allLogs,
+                date: kronos().toLocaleDateString("en-US").split('/'),
                 currentUser: req.session.currentUser
             }
         )

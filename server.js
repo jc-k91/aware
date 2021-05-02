@@ -2,15 +2,15 @@
 // =================AND==================
 // ==============VARIABLES===============
 
-// DOTENV
+// DOTENV ---
 require('dotenv').config()
 
-// EXPRESS
+// EXPRESS ---
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT ?? 3003
 
-// SESSION
+// SESSION ---
 const session = require('express-session')
 app.use(
     session(
@@ -22,20 +22,20 @@ app.use(
     )
 )
 
-// METHOD OVERRIDE
+// METHOD OVERRIDE ---
 const methodOverride = require('method-override')
 
-// CONTROLLERS
+// CONTROLLERS ---
 const mainController = require('./controllers/main_controller.js')
 const usersController = require('./controllers/users_controller.js')
 const sessionController = require('./controllers/session_controller.js')
 
-// DATABASE
+// DATABASE ---
 const mongoose = require('mongoose')
 const mongoURI = process.env.MONGODB_URI
 const db = mongoose.connection
 
-// MISC
+// MISC ---
 const Log = require('./models/logs.js')
 
 // ======================================
@@ -48,9 +48,7 @@ app.use('/users', usersController)
 app.use('/session', sessionController)
 
 // ======================================
-// ========== HOME / REDIRECT ===========
-
-// LANDING
+// ========= LANDING REDIRECT ===========
 app.get('/', (req, res) => {
     if (!req.session.currentUser) {
         res.render('pages/landing.ejs')
@@ -62,12 +60,12 @@ app.get('/', (req, res) => {
 // ======================================
 // ============ CONNECTIONS =============
 
-// EXPRESS
+// EXPRESS ---
 app.listen(PORT, () => {
     console.log("Unit 2 Project app is listening at port " + PORT);
 })
 
-// DATABASE
+// DATABASE ---
 mongoose.connect(
     mongoURI,
     {
