@@ -57,6 +57,23 @@ app.get('/', (req, res) => {
     }
 })
 
+// const Quote = require('./models/quotes.js')
+// const quotesSeed = require('./models/seed_quotes.js')
+// app.get('/seed/quotes', (req, res) => {
+//     Quote.find({}, (err, foundQuotes) => {
+//         for (let i = 0; i < foundQuotes; i++) {
+//             Quote.find({q: foundQuotes[i].q}, (err, dupeCheck) => {
+//                 if (dupeCheck.length > 1) {
+//                     while (dupeCheck.length > 1) {
+//                         Quote.findOneAndRemove({q: foundQuotes[i].q})
+//                     }
+//                 }
+//             })
+//         }
+//         res.redirect('/')
+//     })
+// })
+
 // ======================================
 // ============ CONNECTIONS =============
 
