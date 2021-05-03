@@ -23,3 +23,12 @@ body {
 .link:hover {
     text-decoration: underline;
 }
+
+form {
+    max-width: 490px;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+}

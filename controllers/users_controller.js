@@ -21,6 +21,7 @@ users.get('/new', (req, res) => {
 
 // CREATE PT 2 - CREATE =================NEED TO CHECK ROUTE; PARSE REQ.BODY?
 users.post('/', (req, res) => {
+    req.body.username = req.body.username.toLowerCase()
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
     User.create(
         req.body,
@@ -37,7 +38,7 @@ users.post('/', (req, res) => {
 // UPDATE PT 1.1 - SETTINGS VIEW
 users.get('/settings', (req, res) => {
     if (!req.session.currentUser) {
-        res.render('/')
+        res.redirect('/forbidden')
     } else {
         User.findById(req.session.currentUser._id, (err, thisUser) => {
             res.render(
@@ -54,7 +55,7 @@ users.get('/settings', (req, res) => {
 // UPDATE PT 1.2 - SETTINGS EDIT
 users.get('/settings/edit', (req, res) => {
     if (!req.session.currentUser) {
-        res.render('/')
+        res.redirect('/forbidden')
     } else {
         User.findById(req.session.currentUser._id, (err, thisUser) => {
             res.render(
@@ -69,6 +70,13 @@ users.get('/settings/edit', (req, res) => {
 })
 
 // UPDATE PT 2 - SETTINGS UPDATE
-
+users.put('/settings', (req, res) => {
+    req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+    User.findByIdAndUpdate(
+        req.session.currentUser._id,
+        req.body,
+        (err, updatedUser) => {}
+    )
+})
 
 module.exports = users

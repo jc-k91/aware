@@ -13,12 +13,7 @@ const User = require('../models/users.js')
 // NEW SESSION - NEW
 sessions.get('/sign-in', (req, res) => {
     if (!req.session.currentUser) {
-        res.render(
-            'session/sign-in.ejs',
-            {
-                currentUser: req.session.currentUser
-            }
-        )
+        res.render('session/sign-in.ejs')
     } else {
         res.redirect('/journal/dash')
     }
@@ -27,20 +22,20 @@ sessions.get('/sign-in', (req, res) => {
 // NEW SESSION - CREATE
 sessions.post('/', (req, res) => {
     User.findOne(
-        { username: req.body.username },
+        { username: req.body.username.toLowerCase() },
         (err, foundUser) => {
             if (err) {
                 console.log(err)
                 res.send('Oops, the db had a problem!')
             } else if (!foundUser) {
-                res.send('Sorry, username not found. <a href="/">Go back</a>')
+                res.render('session/invalid.ejs')
             } else {
                 if (bcrypt.compareSync(req.body.password, foundUser.password)) {
-                    console.log('USER SESSION CREATED FOR ' + req.body.username + " =============================");
+                    console.log('USER SESSION CREATED FOR ' + req.body.username + " =============================")
                     req.session.currentUser = foundUser
-                    res.redirect('/')
+                    res.redirect('/journal/dash')
                 } else {
-                    res.send('Sorry, username and password do not match. <a href="/">Go back</a>')
+                    res.render('session/invalid.ejs')
                 }
             }
         }

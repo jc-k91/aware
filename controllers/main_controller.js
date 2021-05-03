@@ -11,7 +11,7 @@ const Quote = require('../models/quotes.js')
 const kronos = () => {
     return new Date(Date.now())
 }
-const months = [ null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+const months = [ null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
 
 // ======================================
 // =========== RESTFUL ROUTES ===========
@@ -19,7 +19,7 @@ const months = [ null, "January", "February", "March", "April", "May", "June", "
 // READ PT 1 - INDEX - RESTFUL
 router.get('/dash/index', (req, res) => {
     if (!req.session.currentUser) {
-        res.render('/')
+        res.redirect('/forbidden')
     } else {
         Log.find({}, (err, allLogs) => {
             res.render(
@@ -35,12 +35,16 @@ router.get('/dash/index', (req, res) => {
 
 // CREATE LOG PT 1 - NEW - RESTFUL
 router.get('/entry/new', (req, res) => {
-    res.render(
-        'pages/new-log.ejs',
-        {
-            currentUser: req.session.currentUser
-        }
-    )
+    if (!req.session.currentUser) {
+        res.redirect('/forbidden')
+    } else {
+        res.render(
+            'pages/new-log.ejs',
+            {
+                currentUser: req.session.currentUser
+            }
+        )
+    }
 })
 
 // CREATE LOG PT 2 - CREATE - RESTFUL
@@ -53,18 +57,22 @@ router.post('/entry', (req, res) => {
 
 // READ PT 2 - SHOW - RESTFUL
 router.get('/entry/:logId', (req, res) => {
-    Log.findById(
-        req.params.logId,
-        (err, thisLog) => {
-            res.render(
-                'pages/show.ejs',
-                {
-                    log: thisLog,
-                    currentUser: req.session.currentUser
-                }
-            )
-        }
-    )
+    if (!req.session.currentUser) {
+        res.redirect('/forbidden')
+    } else {
+        Log.findById(
+            req.params.logId,
+            (err, thisLog) => {
+                res.render(
+                    'pages/show.ejs',
+                    {
+                        log: thisLog,
+                        currentUser: req.session.currentUser
+                    }
+                )
+            }
+        )
+    }
 })
 
 // UPDATE PT 1 - EDIT - RESTFUL
@@ -112,29 +120,24 @@ router.delete('/entry/:logId', (req, res) => {
 
 // HOME DASH
 router.get('/dash', (req, res) => {
-    Log.find({}, (err, allLogs) => {
-        Quote.find({}, (error, allQuotes) => {
-            res.render(
-                'pages/dashboard.ejs',
-                {
-                    logs: allLogs,
-                    date: kronos().toLocaleDateString("en-US").split('/'),
-                    months: months,
-                    quote: allQuotes[ Math.floor( Math.random() * allQuotes.length ) ],
-                    currentUser: req.session.currentUser
-                }
-            )
+    if (!req.session.currentUser) {
+        res.redirect('/forbidden')
+    } else {
+        Log.find({}, (err, allLogs) => {
+            Quote.find({}, (error, allQuotes) => {
+                res.render(
+                    'pages/dashboard.ejs',
+                    {
+                        logs: allLogs,
+                        date: kronos().toLocaleDateString("en-US").split('/'),
+                        months: months,
+                        quote: allQuotes[ Math.floor( Math.random() * allQuotes.length ) ],
+                        currentUser: req.session.currentUser
+                    }
+                )
+            })
         })
-    })
+    }
 })
 
 module.exports = router
-
-// // BUY
-// router.put('/:productId/buy', (req, res) => {
-//     Log.findById(req.params.productId, (err, thisProduct) => {
-//         thisProduct.qty--
-//         thisProduct.save()
-//         res.redirect('/store/' + req.params.productId)
-//     })
-// })

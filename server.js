@@ -59,11 +59,10 @@ app.get('/', (req, res) => {
     }
 })
 
-// FORBIDDEN PAGE
+// FORBIDDEN PAGE ---
 app.get('/forbidden', (req, res) => {
-    res.render('pages/users/forbidden.ejs')
+    res.render('users/forbidden.ejs')
 })
-
 
 // ======================================
 // ============ CONNECTIONS =============
