@@ -5,36 +5,41 @@
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/session.css">
+    <style>
+        body {overflow-y: hidden}
+    </style>
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
 
     <div class="container">
         <div class="content-container">
-            <form action="/journal" method="POST">
+            <form class="" action="/journal" method="POST">
                 <!-- HIDDEN username -->
                     <input type="hidden" name="username" value="<%= currentUser.username %>">
                 <!-- title -->
-                <label for="title">Entry Title</label>
-                    <input class="input-textbox" type="text" name="title" id="title-textbox" value="">
+                    <input class="input-textbox u-full-width" type="text" name="title" id="title-textbox" placeholder="Entry Title">
                 <!-- moodScale -->
-                <label for="moodScale">Mood</label>
-                    <input class="slider" type="range" name="moodScale"  id="moodScale-slider" min="1" max="10" value="5" required>
+                    <div class="mood-scale-container">
+                        <img src="/assets/icons/icon-sad.svg" alt="Sad face">
+                        <div class="slider-container u-full-width">
+                            <input class="slider u-full-width" type="range" name="moodScale"  id="moodScale-slider" min="1" max="10" value="5" required>
+                        </div>
+                        <img src="/assets/icons/icon-happy.svg" alt="Happy face">
+                    </div>
                 <!-- moodWords -->
-                <label for="moodWords">Tags</label>
-                    <input class="input-textbox" type="text" name="moodWords" id="moodWords-textbox" required>
+                    <input class="input-textbox u-full-width" type="text" name="moodWords" id="moodWords-textbox" placeholder="mood, keywords" required>
                 <!-- entry -->
-                <label for="entry">Journal Entry</label>
-                    <textarea class="input-textbox" name="entry" id="entry-textbox"></textarea>
+                    <textarea class="input-textbox u-full-width" name="entry" style="resize: none" id="entry-textbox" placeholder="Write your entry here"></textarea>
                 <!-- globalPrivacy -->
-                <label for="globalPrivacy">Sharing Options: Global</label>
-                    <select class="dropdown" name="globalPrivacy" required>
+                    <select class="dropdown u-full-width" name="globalPrivacy" required>
                         <option value="0" <% if (currentUser.globalPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
-                        <option value="1" <% if (currentUser.globalPrivacy == 1 ) { %>selected<% } %>>Only summary</option>
-                        <option value="2" <% if (currentUser.globalPrivacy == 2 ) { %>selected<% } %>>Full entry</option>
+                        <option value="1" <% if (currentUser.globalPrivacy == 1 ) { %>selected<% } %>>Share summary only</option>
+                        <option value="2" <% if (currentUser.globalPrivacy == 2 ) { %>selected<% } %>>Share full entry</option>
                     </select>
                 <!-- submit button -->
-                <input class="button cta" type="submit">
+                <input class="button button-primary u-full-width" type="submit">
+                <a class="button u-full-width" href="/">Cancel</a>
             </form>
         </div>
     </div>
