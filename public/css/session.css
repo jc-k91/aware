@@ -16,3 +16,49 @@
     width: 75%;
     overflow-x: visible
 }
+
+.dash-date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 3em;
+}
+
+.dash-date > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    padding: 0 1em;
+}
+
+.dash-date > h5 {
+    font-weight: bold;
+    margin: 0;
+}
+
+.quote-container {
+    font-family: "Prata", "Times New Roman", serif;
+    background: #B4CBFF;
+    width: 100vw;
+    margin: 0;
+    padding: .75em 2.25em;
+    box-sizing: border-box;
+}
+
+.quote-container > p {
+    font-size: .8em;
+    margin: .75em;
+}
+
+.quote {
+    font-style: italic;
+    margin-bottom: 10em;
+}
+
+.entry-list.today > h5 {
+    font-weight: bold;
+}

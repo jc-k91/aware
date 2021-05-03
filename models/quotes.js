@@ -8,6 +8,6 @@ const quoteSchema = Schema(
     }
 )
 
-    const Quote = mongoose.model('Quote', quoteSchema)
+const Quote = mongoose.model('Quote', quoteSchema)
 
 module.exports = Quote

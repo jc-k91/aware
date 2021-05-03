@@ -11,14 +11,17 @@
     <%- include('../partials/header.ejs') %>
     <div class="container">
         <div class="content-container">
+            <div class="quote-container">
+                <p class="quote"><%= quote.q %></p>
+                <p class="author u-pull-right"><%= quote.a %></p>
+            </div>
             <div class="dash-date">
-                <%= months[date[0]] %> <%= date[2] %>
+                <a class="button button-primary month-arrow" href=""><</a>
+                <h5><%= months[date[0]] %> <%= date[2] %></h5>
+                <a class="button button-primary month-arrow" href="">></a>
             </div>
-            <div class="quote">
-
-            </div>
-            <div class="entry-list-today">
-                Today
+            <div class="entry-list today">
+                <h6>Today</h6>
             </div>
         </div>
     </div>

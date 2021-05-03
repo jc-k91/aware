@@ -1,6 +1,5 @@
 body {
     background: var(--light-blue);
-    overflow: hidden;
 }
 
 .content-container {

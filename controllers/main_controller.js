@@ -4,6 +4,7 @@ const router = express.Router()
 
 // MODELS
 const Log = require('../models/logs.js')
+const Quote = require('../models/quotes.js')
 // const seed = require('../models/seed.js')
 
 // VARIABLES AND FUNCTIONS
@@ -108,15 +109,18 @@ router.delete('/entry/:logId', (req, res) => {
 // HOME DASH
 router.get('/dash', (req, res) => {
     Log.find({}, (err, allLogs) => {
-        res.render(
-            'pages/dashboard.ejs',
-            {
-                logs: allLogs,
-                date: kronos().toLocaleDateString("en-US").split('/'),
-                months: months,
-                currentUser: req.session.currentUser
-            }
-        )
+        Quote.find({}, (error, allQuotes) => {
+            res.render(
+                'pages/dashboard.ejs',
+                {
+                    logs: allLogs,
+                    date: kronos().toLocaleDateString("en-US").split('/'),
+                    months: months,
+                    quote: allQuotes[ Math.floor( Math.random() * allQuotes.length ) ],
+                    currentUser: req.session.currentUser
+                }
+            )
+        })
     })
 })
 
