@@ -13,10 +13,10 @@ const kronos = () => {
 const months = [ null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
 // ======================================
-// =============== ROUTES ===============
+// =========== RESTFUL ROUTES ===========
 
 // READ PT 1 - INDEX - RESTFUL
-router.get('/index', (req, res) => {
+router.get('/dash/index', (req, res) => {
     Log.find({}, (err, allLogs) => {
         res.render(
             'pages/index.ejs',
@@ -101,6 +101,9 @@ router.delete('/entry/:logId', (req, res) => {
         }
     )
 })
+
+// ======================================
+// ============ OTHER ROUTES ============
 
 // HOME DASH
 router.get('/dash', (req, res) => {
