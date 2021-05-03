@@ -8,6 +8,7 @@ header {
     height: 7rem;
     background: var(--dark-blue);
     margin: 0;
+    /* border-bottom: 1px solid var(--light-blue); */
     box-sizing: border-box;
     z-index: 2;
 }

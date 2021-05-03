@@ -1,6 +1,6 @@
 body {
     overflow-y: scroll;
-    background: var(--dark-blue);
+    background: var(--light-blue);
 }
 
 .container {
@@ -46,6 +46,10 @@ body {
 }
 
 .quote-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-family: "Prata", "Times New Roman", serif;
     background: #B4CBFF;
     width: 100vw;
@@ -54,13 +58,19 @@ body {
     box-sizing: border-box;
 }
 
-.quote-container > p {
+.quote-container p {
     font-size: .8em;
+    width: 75%;
+    max-width: 720px;
     margin: .75em;
 }
 
 .quote {
     font-style: italic;
+}
+
+.author {
+    text-align: right;
 }
 
 .content-container > fieldset {
