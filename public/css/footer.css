@@ -9,7 +9,6 @@ footer {
     height: calc(5.5rem + 5px);
     background: var(--dark-blue);
     margin: 0;
-    /* border-top: 1px solid var(--light-blue); */
     box-sizing: border-box;
     z-index: 2;
 }

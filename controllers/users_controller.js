@@ -34,8 +34,8 @@ users.post('/', (req, res) => {
     )
 })
 
-// UPDATE PT 1 - EDIT
-users.get('/edit', (req, res) => {
+// UPDATE PT 1.1 - SETTINGS VIEW
+users.get('/settings', (req, res) => {
     if (!req.session.currentUser) {
         res.render('/')
     } else {
@@ -51,7 +51,24 @@ users.get('/edit', (req, res) => {
     }
 })
 
-// UPDATE PT 2 - UPDATE
+// UPDATE PT 1.2 - SETTINGS EDIT
+users.get('/settings/edit', (req, res) => {
+    if (!req.session.currentUser) {
+        res.render('/')
+    } else {
+        User.findById(req.session.currentUser._id, (err, thisUser) => {
+            res.render(
+                'users/user-settings-edit.ejs',
+                {
+                    user: thisUser,
+                    currentUser: req.session.currentUser
+                }
+            )
+        })
+    }
+})
+
+// UPDATE PT 2 - SETTINGS UPDATE
 
 
 module.exports = users

@@ -18,15 +18,19 @@ const months = [ null, "January", "February", "March", "April", "May", "June", "
 
 // READ PT 1 - INDEX - RESTFUL
 router.get('/dash/index', (req, res) => {
-    Log.find({}, (err, allLogs) => {
-        res.render(
-            'pages/index.ejs',
-            {
-                logs: allLogs,
-                currentUser: req.session.currentUser
-            }
-        )
-    })
+    if (!req.session.currentUser) {
+        res.render('/')
+    } else {
+        Log.find({}, (err, allLogs) => {
+            res.render(
+                'pages/index.ejs',
+                {
+                    logs: allLogs,
+                    currentUser: req.session.currentUser
+                }
+            )
+        })
+    }
 })
 
 // CREATE LOG PT 1 - NEW - RESTFUL
@@ -125,14 +129,6 @@ router.get('/dash', (req, res) => {
 })
 
 module.exports = router
-
-// // SEED
-// router.get('/seed', (req, res) => {
-//     Log.create(seed, (err, seededData) => {
-//         console.log(seededData)
-//         res.redirect('store')
-//     })
-// })
 
 // // BUY
 // router.put('/:productId/buy', (req, res) => {

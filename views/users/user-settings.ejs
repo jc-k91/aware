@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <%- include('../partials/head.ejs') %>
-    <title>Document</title>
+    <title>Aware</title>
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
@@ -21,16 +21,9 @@
             <!-- lastName -->
             <label for="lastName">Last Name</label>
                 <input class="input-textbox" type="text" name="lastName" id="lastName-textbox" placeholder="Last Name"><br/>
-            <!-- defaultFriendsPrivacy -->
-            <label for="friendsPrivacy">Sharing Options: Friends</label>
-                <select class="dropdown" name="friendsPrivacy">
-                    <option value="0" <% if (user.friendsPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
-                    <option value="1" <% if (user.friendsPrivacy == 1 ) { %>selected<% } %>>Only summary</option>
-                    <option value="2" <% if (user.friendsPrivacy == 2 ) { %>selected<% } %>>Full entry</option>
-                </select>
-            <!-- defaultGlobalPrivacy -->
-            <label for="globalPrivacy">Sharing Options: Global</label>
-                <select class="dropdown" name="globalPrivacy">
+            <!-- defaultPrivacy -->
+            <label for="privacy">Default Sharing Options</label>
+                <select class="dropdown" name="privacy">
                     <option value="0" <% if (user.globalPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
                     <option value="1" <% if (user.globalPrivacy == 1 ) { %>selected<% } %>>Only summary</option>
                     <option value="2" <% if (user.globalPrivacy == 2 ) { %>selected<% } %>>Full entry</option>

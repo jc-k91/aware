@@ -5,13 +5,13 @@ const logSchema = new Schema(
     {
         username: { type: String, required: true },
         title: { type: String, unique: true, required: true },
-        moodScale: { type: Number, min: 0, max: 10 },
+        moodScale: { type: Number, min: 0, max: 6 },
         moodWords: { type: [String], required: true },
         entry: { type: String },
         globalPrivacy: { type: Number, required: true } // 0 = share nothing, 1 = share only summary, 2 = share full entries. Defaults to user's setting.
     },
     {
-        timestamps: true
+        timestamps: { currentTime: () => Math.floor(Date.now()) }
     }
 )
 

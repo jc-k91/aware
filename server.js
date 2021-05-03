@@ -48,7 +48,9 @@ app.use('/users', usersController)
 app.use('/session', sessionController)
 
 // ======================================
-// ========= LANDING REDIRECT ===========
+// =========== MISC ROUTES ==============
+
+// LANDING REDIRECT ---
 app.get('/', (req, res) => {
     if (!req.session.currentUser) {
         res.render('pages/landing.ejs')
@@ -57,22 +59,11 @@ app.get('/', (req, res) => {
     }
 })
 
-// const Quote = require('./models/quotes.js')
-// const quotesSeed = require('./models/seed_quotes.js')
-// app.get('/seed/quotes', (req, res) => {
-//     Quote.find({}, (err, foundQuotes) => {
-//         for (let i = 0; i < foundQuotes; i++) {
-//             Quote.find({q: foundQuotes[i].q}, (err, dupeCheck) => {
-//                 if (dupeCheck.length > 1) {
-//                     while (dupeCheck.length > 1) {
-//                         Quote.findOneAndRemove({q: foundQuotes[i].q})
-//                     }
-//                 }
-//             })
-//         }
-//         res.redirect('/')
-//     })
-// })
+// FORBIDDEN PAGE
+app.get('/forbidden', (req, res) => {
+    res.render('pages/users/forbidden.ejs')
+})
+
 
 // ======================================
 // ============ CONNECTIONS =============
