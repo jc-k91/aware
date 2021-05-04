@@ -15,11 +15,11 @@ const logSchema = new Schema(
         moodScale: {
             type: Number,
             min: 0,
-            max: 6
+            max: 6,
+            required: true
         },
         moodWords: {
-            type: [String],
-            required: true
+            type: [String]
         },
         entry: {
             type: String
@@ -27,14 +27,10 @@ const logSchema = new Schema(
         privacy: { // 0 = share nothing, 1 = share only summary, 2 = share full entries. Defaults to user's setting.
             type: Number,
             required: true
-        },
-        createdTime: {
-            type: Number
-        },
-        lastEditTime: {
-            type: Number,
-            default: 0
         }
+    },
+    {
+        timestamps: true
     }
 )
 

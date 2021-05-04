@@ -82,7 +82,7 @@ mongoose.connect(
         useCreateIndex: true,
     },
     () => {
-        console.log("Connection with mongod established.");
+        console.log("Connection with mongod established. ============================");
     }
 )
 

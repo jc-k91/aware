@@ -11,7 +11,7 @@ const Quote = require('../models/quotes.js')
 const kronos = () => {
     return new Date(Date.now())
 }
-const months = [ null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
+const monthNameArr = [ null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
 
 // ======================================
 // =========== RESTFUL ROUTES ===========
@@ -137,11 +137,12 @@ router.get('/dash', (req, res) => {
                 res.render(
                     'pages/dashboard.ejs',
                     {
-                        logs: allLogs,
-                        dateArray: kronos().toLocaleDateString("en-US").split('/'),
-                        months: months,
                         quote: allQuotes[ Math.floor( Math.random() * allQuotes.length ) ],
-                        currentUser: req.session.currentUser
+                        Log: Log,
+                        currentUser: req.session.currentUser,
+                        logs: allLogs,
+                        today: kronos().toLocaleDateString("en-US").split('/'),
+                        months: monthNameArr,
                     }
                 )
             })

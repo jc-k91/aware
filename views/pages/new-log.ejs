@@ -2,12 +2,7 @@
 <html lang="en">
 <head>
     <%- include('../partials/head.ejs') %>
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/session.css">
-    <style>
-        body {overflow-y: hidden}
-    </style>
+    <%- include('../partials/session-head.ejs') %>
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
@@ -18,7 +13,7 @@
                 <!-- HIDDEN username -->
                     <input type="hidden" name="username" value="<%= currentUser.username %>">
                 <!-- HIDDEN timestamp -->
-                    <input type="hidden" name="createdTime" value="<%= Date.now() %>">
+                    <input type="hidden" name="createdDate" value="<%= Date.now() %>">
                 <!-- title -->
                     <input class="input-textbox u-full-width" type="text" name="title" id="title-textbox" placeholder="Entry Title">
                 <!-- moodScale -->

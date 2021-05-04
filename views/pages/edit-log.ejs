@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <%- include('../partials/head.ejs') %>
+    <%- include('../partials/session-head.ejs') %>
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
@@ -11,8 +12,6 @@
         <form action="/journal/<%= log._id %>?_method=PUT" method="POST">
             <!-- HIDDEN username -->
                 <input type="hidden" name="username" value="<%= currentUser.username %>">
-            <!-- HIDDEN timestamp -->
-                <input type="hidden" name="lastEditTime" value="<%= Date.now() $>">
             <!-- title -->
             <label for="title">Entry Title</label>
                 <input class="input-textbox" type="text" name="title" id="title-textbox" value="<%= log.title %>">
@@ -25,19 +24,12 @@
             <!-- entry -->
             <label for="entry">Journal Entry</label>
                 <textarea class="input-textbox" name="entry" id="entry-textbox"><%= log.entry %></textarea>
-            <!-- friendsPrivacy -->
-            <label for="friendsPrivacy">Sharing Options: Friends</label>
-                <select class="dropdown" name="friendsPrivacy" required>
-                    <option value="0" <% if (log.friendsPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
-                    <option value="1" <% if (log.friendsPrivacy == 1 ) { %>selected<% } %>>Only summary</option>
-                    <option value="2" <% if (log.friendsPrivacy == 2 ) { %>selected<% } %>>Full entry</option>
-                </select>
-            <!-- globalPrivacy -->
+            <!-- privacy -->
             <label for="globalPrivacy">Sharing Options: Global</label>
-                <select class="dropdown" name="globalPrivacy" required>
-                    <option value="0" <% if (log.globalPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
-                    <option value="1" <% if (log.globalPrivacy == 1 ) { %>selected<% } %>>Only summary</option>
-                    <option value="2" <% if (log.globalPrivacy == 2 ) { %>selected<% } %>>Full entry</option>
+                <select class="dropdown" name="privacy" required>
+                    <option value="0" <% if (log.privacy == 0 ) { %>selected<% } %>>Don't share</option>
+                    <option value="1" <% if (log.privacy == 1 ) { %>selected<% } %>>Only summary</option>
+                    <option value="2" <% if (log.privacy == 2 ) { %>selected<% } %>>Full entry</option>
                 </select>
             <!-- submit button -->
             <input class="button cta" type="submit">

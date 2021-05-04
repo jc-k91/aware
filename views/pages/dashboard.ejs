@@ -2,10 +2,7 @@
 <html lang="en">
 <head>
     <%- include('../partials/head.ejs') %>
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/session.css">
-    <script src="/js/app.js" charset="utf-8" defer></script>
+    <%- include('../partials/session-head.ejs') %>
 </head>
 <body>
     <%- include('../partials/header.ejs') %>
@@ -17,15 +14,19 @@
             </div>
             <div class="dash-date">
                 <a class="button button-primary month-arrow" href=""><</a>
-                <h5><%= months[date[0]] %> <%= date[2] %></h5>
+                <h5><%= months[today[0]] %> <%= today[2] %></h5>
                 <a class="button button-primary month-arrow" href="">></a>
             </div>
             <fieldset class="entry-list today">
-                <legend><h5>Today</h5></legend>
-                <!-- ################################# -->
+                <legend><h5>Today's Entries</h5></legend>
+                <% for (let log of logs) {
+                    if (log.createdAt.toLocaleDateString === today) { %>
+                        <div>log</div>
+                    <% }
+                } %>
             </fieldset>
             <fieldset class="entry-list today">
-                <legend><h5>This Month</h5></legend>
+                <legend><h5>This Month's Entries</h5></legend>
                 <!-- ################################# -->
             </fieldset>
         </div>
