@@ -38,6 +38,7 @@ router.get('/entry/new', (req, res) => {
     if (!req.session.currentUser) {
         res.redirect('/forbidden')
     } else {
+        console.log(req.session.currentUser.firstName + " just opened the new log page.")
         res.render(
             'pages/new-log.ejs',
             {
@@ -50,8 +51,16 @@ router.get('/entry/new', (req, res) => {
 // CREATE LOG PT 2 - CREATE - RESTFUL
 router.post('/entry', (req, res) => {
     req.body.moodWords = req.body.moodWords.split(', ')
+    for (let tag of req.body.moodWords) {
+        tag = tag.toLowerCase()
+    }
     Log.create(req.body, (err, newLog) => {
-        res.redirect('/journal/' + newLog._id)
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(newLog)
+            res.redirect('/journal/dash')
+        }
     })
 })
 
@@ -129,7 +138,7 @@ router.get('/dash', (req, res) => {
                     'pages/dashboard.ejs',
                     {
                         logs: allLogs,
-                        date: kronos().toLocaleDateString("en-US").split('/'),
+                        dateArray: kronos().toLocaleDateString("en-US").split('/'),
                         months: months,
                         quote: allQuotes[ Math.floor( Math.random() * allQuotes.length ) ],
                         currentUser: req.session.currentUser

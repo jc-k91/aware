@@ -11,6 +11,8 @@
         <form action="/journal/<%= log._id %>?_method=PUT" method="POST">
             <!-- HIDDEN username -->
                 <input type="hidden" name="username" value="<%= currentUser.username %>">
+            <!-- HIDDEN timestamp -->
+                <input type="hidden" name="lastEditTime" value="<%= Date.now() $>">
             <!-- title -->
             <label for="title">Entry Title</label>
                 <input class="input-textbox" type="text" name="title" id="title-textbox" value="<%= log.title %>">

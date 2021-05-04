@@ -14,9 +14,11 @@
 
     <div class="container">
         <div class="content-container">
-            <form class="" action="/journal" method="POST">
+            <form action="/journal/entry" method="POST">
                 <!-- HIDDEN username -->
                     <input type="hidden" name="username" value="<%= currentUser.username %>">
+                <!-- HIDDEN timestamp -->
+                    <input type="hidden" name="createdTime" value="<%= Date.now() %>">
                 <!-- title -->
                     <input class="input-textbox u-full-width" type="text" name="title" id="title-textbox" placeholder="Entry Title">
                 <!-- moodScale -->
@@ -31,11 +33,11 @@
                     <input class="input-textbox u-full-width" type="text" name="moodWords" id="moodWords-textbox" placeholder="mood, keywords" required>
                 <!-- entry -->
                     <textarea class="input-textbox u-full-width" name="entry" style="resize: none" id="entry-textbox" placeholder="Write your entry here"></textarea>
-                <!-- globalPrivacy -->
-                    <select class="dropdown u-full-width" name="globalPrivacy" required>
-                        <option value="0" <% if (currentUser.globalPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
-                        <option value="1" <% if (currentUser.globalPrivacy == 1 ) { %>selected<% } %>>Share summary only</option>
-                        <option value="2" <% if (currentUser.globalPrivacy == 2 ) { %>selected<% } %>>Share full entry</option>
+                <!-- privacy -->
+                    <select class="dropdown u-full-width" name="privacy" required>
+                        <option value="0" <% if (currentUser.defaultPrivacy == 0 ) { %>selected<% } %>>Don't share</option>
+                        <option value="1" <% if (currentUser.defaultPrivacy == 1 ) { %>selected<% } %>>Share summary only</option>
+                        <option value="2" <% if (currentUser.defaultPrivacy == 2 ) { %>selected<% } %>>Share full entry</option>
                     </select>
                 <!-- submit button -->
                 <input class="button button-primary u-full-width" type="submit">
