@@ -13,6 +13,9 @@ const kronos = () => {
 }
 const monthNameArr = [ null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
 
+// LOG DATE PARSER
+const dateParser = require('../public/js/date-parser.js')
+
 // ======================================
 // =========== RESTFUL ROUTES ===========
 
