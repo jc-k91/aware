@@ -24,11 +24,12 @@ router.get('/dash/:year/:month', (req, res) => {
         const todayArr = kronos(Date.now()).toLocaleDateString('en-US').split('/')
         Log.find(
             {
-                username: req.session.currentUser,
-                createdYear: req.params.year,
-                createdMonth: req.params.month
+                username: req.session.currentUser.username,
+                monthCreated: ("" + req.params.month),
+                yearCreated: ("" + req.params.year)
             },
             (err, allLogs) => {
+                console.log(allLogs);
                 res.render(
                     'pages/index.ejs',
                     {
@@ -64,10 +65,7 @@ router.get('/entry/new', (req, res) => {
 
 // CREATE LOG PT 2 - CREATE - RESTFUL
 router.post('/entry', (req, res) => {
-    req.body.moodWords = req.body.moodWords.split(', ')
-    for (let tag of req.body.moodWords) {
-        tag = tag.toLowerCase()
-    }
+    req.body.moodWords = req.body.moodWords.toLowerCase().split(', ')
     Log.create(req.body, (err, createdLog) => {
         if (err) {
             console.log(err)
@@ -91,6 +89,7 @@ router.get('/entry/:logId', (req, res) => {
                     'pages/show.ejs',
                     {
                         log: thisLog,
+                        months: monthNameArr,
                         today: todayArr,
                         currentUser: req.session.currentUser
                     }
@@ -124,10 +123,14 @@ router.get('/entry/:logId/edit', (req, res) => {
 
 // UPDATE PT 2 - UPDATE - RESTFUL =================NEED TO CHECK ROUTE; PARSE REQ.BODY?
 router.put('/entry/:logId', (req, res) => {
-    req.body.moodWords = req.body.moodWords.split(', ')
-    Log.findByIdAndUpdate(req.params.logId, req.body, (err, thisLog) => {
-        res.redirect('/journal/' + req.params.logId)
-    })
+    req.body.moodWords = req.body.moodWords.toLowerCase().split(', ')
+    Log.findByIdAndUpdate(
+        req.params.logId,
+        req.body,
+        (err, thisLog) => {
+            res.redirect('/journal/entry/' + req.params.logId)
+        }
+    )
 })
 
 // DESTROY - RESTFUL
@@ -161,7 +164,9 @@ router.get('/dash', (req, res) => {
         Log.find(
             {
                 username: req.session.currentUser.username,
-                monthCreated: thisMonth
+                monthCreated: thisMonth,
+                yearCreated: thisYear,
+                dateCreated: thisDate
             },
             (err, allLogs) => {
             Quote.find({}, (error, allQuotes) => {

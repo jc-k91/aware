@@ -21,6 +21,7 @@ footer > .footer {
     text-decoration: none;
     position: relative;
     width: 31%;
+    max-width: 450px;
     height: 100%;
     margin: 0;
 }

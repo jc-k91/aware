@@ -8,6 +8,12 @@ const users = express.Router()
 // MODELS
 const User = require('../models/users.js')
 
+// DATE VARIABLES
+const monthNameArr = [ null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
+const kronos = (date) => {
+    return new Date(date)
+}
+
 // ======================================
 // =============== ROUTES ===============
 // CREATE PT 1 - NEW
@@ -41,10 +47,12 @@ users.get('/settings', (req, res) => {
         res.redirect('/forbidden')
     } else {
         User.findById(req.session.currentUser._id, (err, thisUser) => {
+            const todayArr = kronos(Date.now()).toLocaleDateString('en-US').split('/')
             res.render(
                 'users/user-settings.ejs',
                 {
                     user: thisUser,
+                    today: todayArr,
                     currentUser: req.session.currentUser
                 }
             )
@@ -58,10 +66,12 @@ users.get('/settings/edit', (req, res) => {
         res.redirect('/forbidden')
     } else {
         User.findById(req.session.currentUser._id, (err, thisUser) => {
+            const todayArr = kronos(Date.now()).toLocaleDateString('en-US').split('/')
             res.render(
                 'users/user-settings-edit.ejs',
                 {
                     user: thisUser,
+                    today: todayArr,
                     currentUser: req.session.currentUser
                 }
             )

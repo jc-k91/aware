@@ -222,7 +222,16 @@ input[type="button"].button-primary:focus {
   color: var(--light-blue);
   background-color: var(--accent-blue);
   border-color: var(--accent-blue); }
-
+.button.button-delete {
+    color: white;
+    background: #E42424;
+    border: #E42424;
+}
+.button.button-delete:hover {
+    color: white;
+    background: #D42323;
+    border: #D42323;
+}
 
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

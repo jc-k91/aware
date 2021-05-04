@@ -93,8 +93,8 @@ body {
     width: calc(100% + .25em);
     margin: 0;
     margin-bottom: 2em;
-    padding: 0 1.25em;
-    border: 1px solid var(--dark-blue);
+    padding: 0 1.25em 3em 1.25em;
+    border: 2px solid var(--dark-blue);
     box-sizing: content-box;
 }
 
@@ -107,6 +107,7 @@ legend > h6 {
 }
 
 form {
+    width: 100%;
     padding: 1.5em 0;
 }
 
@@ -119,6 +120,7 @@ textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
     margin-bottom: 15px;
 }
 
@@ -129,4 +131,58 @@ textarea {
 
 .slider {
     margin: 0;
+}
+
+.entry-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+    max-width: 540px;
+    background: #E0EAFF;
+    margin: 0;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+p.log-title, p.log-date, p.preview, p.tag-container {
+    margin-bottom: .5em;
+}
+
+.entry-container .log-date {
+    position: absolute;
+    right: 0;
+}
+
+.tag-container > span {
+    color: var(--light-blue);
+    background: var(--dark-blue);
+    margin-right: .5em;
+    padding: .25em .5em;
+}
+
+.show {
+    position: relative;
+}
+
+.show form {
+    padding: 0;
+}
+
+.show log-date {
+    position: relative;
+}
+
+.show h4 {
+    margin-bottom: .25em;
+}
+
+.edit h4 {
+    margin: 1em 0 0 0;
+}
+
+.edit form {
+    margin-bottom: 0;
 }

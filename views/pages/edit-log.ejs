@@ -7,33 +7,34 @@
 <body>
     <%- include('../partials/header.ejs') %>
     <div class="container">
-        <h1>Edit</h1>
-        <%= log %>
-        <form action="/journal/<%= log._id %>?_method=PUT" method="POST">
-            <!-- HIDDEN username -->
-                <input type="hidden" name="username" value="<%= currentUser.username %>">
-            <!-- title -->
-            <label for="title">Entry Title</label>
-                <input class="input-textbox" type="text" name="title" id="title-textbox" value="<%= log.title %>">
-            <!-- moodScale -->
-            <label for="moodScale">Mood</label>
-                <input class="slider" type="range" name="moodScale"  id="moodScale-slider" min="1" max="10" value="log.moodScale" required>
-            <!-- moodWords -->
-            <label for="moodWords">Tags</label>
-                <input class="input-textbox" type="text" name="moodWords" id="moodWords-textbox" value="<%= log.moodWords.join(', ') %>" required>
-            <!-- entry -->
-            <label for="entry">Journal Entry</label>
-                <textarea class="input-textbox" name="entry" id="entry-textbox"><%= log.entry %></textarea>
-            <!-- privacy -->
-            <label for="globalPrivacy">Sharing Options: Global</label>
-                <select class="dropdown" name="privacy" required>
-                    <option value="0" <% if (log.privacy == 0 ) { %>selected<% } %>>Don't share</option>
-                    <option value="1" <% if (log.privacy == 1 ) { %>selected<% } %>>Only summary</option>
-                    <option value="2" <% if (log.privacy == 2 ) { %>selected<% } %>>Full entry</option>
-                </select>
-            <!-- submit button -->
-            <input class="button cta" type="submit">
-        </form>
+        <div class="content-container edit">
+            <h4>Edit Entry</h4>
+            <form action="/journal/entry/<%= log._id %>?_method=PUT" method="POST">
+                <!-- title -->
+                    <input class="input-textbox u-full-width" type="text" name="title" id="title-textbox" value="<%= log.title %>">
+                <!-- moodScale -->
+                    <div class="mood-scale-container">
+                        <img src="/assets/icons/icon-sad.svg" alt="Sad face">
+                        <div class="slider-container u-full-width">
+                            <input class="slider u-full-width" type="range" name="moodScale"  id="moodScale-slider" min="0" max="6" value="<%= log.moodScale %>" required>
+                        </div>
+                        <img src="/assets/icons/icon-happy.svg" alt="Happy face">
+                    </div>
+                <!-- moodWords -->
+                    <input class="input-textbox u-full-width" type="text" name="moodWords" id="moodWords-textbox" value="<%= log.moodWords.join(', ') %>" required>
+                <!-- entry -->
+                    <textarea class="input-textbox u-full-width" name="entry" style="resize: none" id="entry-textbox"><%= log.entry %></textarea>
+                <!-- privacy -->
+                    <select class="dropdown u-full-width" name="privacy" required>
+                        <option value="0" <% if (log.privacy == 0 ) { %>selected<% } %>>Don't share</option>
+                        <option value="1" <% if (log.privacy == 1 ) { %>selected<% } %>>Share summary only</option>
+                        <option value="2" <% if (log.privacy == 2 ) { %>selected<% } %>>Share full entry</option>
+                    </select>
+                <!-- submit button -->
+                <input class="button button-primary u-full-width" type="submit" value="confirm changes">
+                <a class="button u-full-width" href="/journal/entry/<%= log._id %>">Cancel</a>
+            </form>
+        </div>
     </div>
     <%- include('../partials/footer.ejs') %>
 </body>

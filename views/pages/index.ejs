@@ -9,9 +9,9 @@
     <div class="container">
         <div class="content-container">
             <div class="dash-date">
-                <a class="button button-primary month-arrow" href=""><</a>
+                <a class="button button-primary month-arrow" href="/journal/dash/<%= thisYear %>/<%= parseInt(thisMonth) - 1 %>"><</a>
                 <h5><%= months[thisMonth] %> <%= thisYear %></h5>
-                <a class="button button-primary month-arrow" href="">></a>
+                <a class="button button-primary month-arrow" href="/journal/dash/<%= thisYear %>/<%= parseInt(thisMonth) + 1 %>">></a>
             </div>
             <!-- THIS MONTH -->
             <fieldset class="entry-list this-month">
@@ -22,21 +22,20 @@
                 <% for (let log of logs) { %>
                     <div class="entry-container">
                         <p class="log-title">
-                            <%= log.title %>
+                            <a href="/journal/entry/<%= log._id %>"><%= log.title %></a>
                         </p>
                         <p class="log-date">
                             <%= months[log.monthCreated] %> <%= log.dateCreated %>, <%= log.yearCreated %>
                         </p>
-                        <p class="mood-scale">
-                            <%= log.moodScale %>
+                        <p class="preview">
+                            <%= log.entry.slice(0, 100) %>...
                         </p>
-                        <% for (let tag of moodWords) { %>
-                            <p class="mood-tag">
-                                <%= tag %>
-                            </p>
-                        <% } %>
-                        <p class="log-entry">
-                            <%= log.entry %>
+                        <p class="tag-container">
+                            <% for (let tag of log.moodWords) { %>
+                                <span class="mood-tag">
+                                    <%= tag %>
+                                </span>
+                            <% } %>
                         </p>
                     </div>
                 <% } %>

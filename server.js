@@ -37,6 +37,7 @@ const db = mongoose.connection
 
 // MISC ---
 const Log = require('./models/logs.js')
+const seedPost = require('./models/seed-posts.js')
 
 // ======================================
 // ============= MIDDLEWARE =============
@@ -62,6 +63,25 @@ app.get('/', (req, res) => {
 // FORBIDDEN PAGE ---
 app.get('/forbidden', (req, res) => {
     res.render('users/forbidden.ejs')
+})
+
+// SEED POSTS
+app.get('/seed/:user/:month/:date/:reps', (req, res) => {
+    const seedArr = []
+    for (let i = 0; i < req.params.reps; i++) {
+        seedArr.push(seedPost(req.params.user, i, req.params.month, req.params.date))
+    }
+    Log.create(
+        seedArr,
+        (err, seededPosts) => {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log(seededPosts)
+                res.redirect('/')
+            }
+        }
+    )
 })
 
 // ======================================

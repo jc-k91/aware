@@ -7,11 +7,35 @@
 <body>
     <%- include('../partials/header.ejs') %>
     <div class="container">
-        <h1>Entry Title</h1>
-        <%= log %>
-        <form action="/journal/<%= log._id %>?_method=DELETE" method="POST">
-            <input type="submit" value="Delete">
-        </form>
+        <div class="content-container show">
+            <h4 class="log-title">
+                <br/><%= log.title %>
+            </h4>
+            <p class="log-date">
+                <%= months[log.monthCreated] %> <%= log.dateCreated %>, <%= log.yearCreated %>
+            </p>
+            <p class="tag-container">
+                <% for (let tag of log.moodWords) { %>
+                    <span class="mood-tag">
+                        <%= tag %>
+                    </span>
+                <% } %>
+            </p>
+            <div class="mood-scale-container">
+                <img src="/assets/icons/icon-sad.svg" alt="Sad face">
+                <div class="slider-container u-full-width">
+                    <input class="slider u-full-width" type="range" name="moodScale"  id="moodScale-slider" min="0" max="6" value="5" required>
+                </div>
+                <img src="/assets/icons/icon-happy.svg" alt="Happy face">
+            </div>
+            <p class="log-entry">
+                <%= log.entry %>
+            </p>
+            <form action="/journal/entry/<%= log._id %>?_method=DELETE" method="POST">
+                <a class="button u-full-width" href="/journal/entry/<%= log._id %>/edit">Edit</a>
+                <input class="button button-delete u-full-width" type="submit" value="DELETE">
+            </form>
+        </div>
     </div>
     <%- include('../partials/footer.ejs') %>
 </body>

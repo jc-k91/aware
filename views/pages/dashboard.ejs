@@ -24,13 +24,13 @@
                 <% for (let log of logs) { %>
                     <div class="entry-container">
                         <p class="log-title">
-                            Title: <%= log.title %>
+                            <a href="/journal/entry/<%= log._id %>"><%= log.title %></a>
                         </p>
                         <p class="log-date">
-                            Date: <%= months[log.monthCreated] %> <%= log.dateCreated %>, <%= log.yearCreated %>
+                            <%= months[log.monthCreated] %> <%= log.dateCreated %>, <%= log.yearCreated %>
                         </p>
-                        <p class="mood-scale">
-                            Mood Level: <%= log.moodScale %>
+                        <p class="preview">
+                            <%= log.entry.slice(0, 100) %>...
                         </p>
                         <p class="tag-container">
                             <% for (let tag of log.moodWords) { %>
@@ -38,9 +38,6 @@
                                     <%= tag %>
                                 </span>
                             <% } %>
-                        </p>
-                        <p class="log-entry">
-                            Entry: <%= log.entry %>
                         </p>
                     </div>
                 <% } %>
