@@ -12,22 +12,38 @@
                 <p class="quote"><%= quote.q %></p>
                 <p class="author"><%= quote.a %></p>
             </div>
-            <div class="dash-date">
-                <a class="button button-primary month-arrow" href=""><</a>
-                <h5><%= months[today[0]] %> <%= today[2] %></h5>
-                <a class="button button-primary month-arrow" href="">></a>
+            <div class="greeting">
+                <h5>Hello, <%= currentUser.firstName %>. Today is <%= months[thisMonth] %> <%= thisDate %>, <%= thisYear %></h5>
             </div>
+            <!-- TODAY -->
             <fieldset class="entry-list today">
-                <legend><h5>Today's Entries</h5></legend>
-                <% for (let log of logs) {
-                    if (log.createdAt.toLocaleDateString === today) { %>
-                        <div>log</div>
-                    <% }
-                } %>
-            </fieldset>
-            <fieldset class="entry-list today">
-                <legend><h5>This Month's Entries</h5></legend>
-                <!-- ################################# -->
+                <legend><h6>Today's Entries</h6></legend>
+                <% if (logs.length === 0) { %>
+                    <p>You haven't written any new journal entries for today. Press the '+' button at the bottom of the screen to write one now!</p>
+                <% } %>
+                <% for (let log of logs) { %>
+                    <div class="entry-container">
+                        <p class="log-title">
+                            Title: <%= log.title %>
+                        </p>
+                        <p class="log-date">
+                            Date: <%= months[log.monthCreated] %> <%= log.dateCreated %>, <%= log.yearCreated %>
+                        </p>
+                        <p class="mood-scale">
+                            Mood Level: <%= log.moodScale %>
+                        </p>
+                        <p class="tag-container">
+                            <% for (let tag of log.moodWords) { %>
+                                <span class="mood-tag">
+                                    <%= tag %>
+                                </span>
+                            <% } %>
+                        </p>
+                        <p class="log-entry">
+                            Entry: <%= log.entry %>
+                        </p>
+                    </div>
+                <% } %>
             </fieldset>
         </div>
     </div>

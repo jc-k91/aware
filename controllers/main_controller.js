@@ -5,34 +5,43 @@ const router = express.Router()
 // MODELS
 const Log = require('../models/logs.js')
 const Quote = require('../models/quotes.js')
-// const seed = require('../models/seed.js')
 
-// VARIABLES AND FUNCTIONS
-const kronos = () => {
-    return new Date(Date.now())
-}
+// DATE VARIABLES
 const monthNameArr = [ null, "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
+const kronos = (date) => {
+    return new Date(date)
+}
 
-// LOG DATE PARSER
-const dateParser = require('../public/js/date-parser.js')
 
 // ======================================
 // =========== RESTFUL ROUTES ===========
 
 // READ PT 1 - INDEX - RESTFUL
-router.get('/dash/index', (req, res) => {
+router.get('/dash/:year/:month', (req, res) => {
     if (!req.session.currentUser) {
         res.redirect('/forbidden')
     } else {
-        Log.find({}, (err, allLogs) => {
-            res.render(
-                'pages/index.ejs',
-                {
-                    logs: allLogs,
-                    currentUser: req.session.currentUser
-                }
-            )
-        })
+        const todayArr = kronos(Date.now()).toLocaleDateString('en-US').split('/')
+        Log.find(
+            {
+                username: req.session.currentUser,
+                createdYear: req.params.year,
+                createdMonth: req.params.month
+            },
+            (err, allLogs) => {
+                res.render(
+                    'pages/index.ejs',
+                    {
+                        logs: allLogs,
+                        today: todayArr,
+                        currentUser: req.session.currentUser,
+                        thisYear: req.params.year,
+                        thisMonth: req.params.month,
+                        months: monthNameArr
+                    }
+                )
+            }
+        )
     }
 })
 
@@ -41,10 +50,12 @@ router.get('/entry/new', (req, res) => {
     if (!req.session.currentUser) {
         res.redirect('/forbidden')
     } else {
-        console.log(req.session.currentUser.firstName + " just opened the new log page.")
+        const todayArr = kronos(Date.now()).toLocaleDateString('en-US').split('/')
         res.render(
             'pages/new-log.ejs',
             {
+                date: () => { return new Date(Date.now()) },
+                today: todayArr,
                 currentUser: req.session.currentUser
             }
         )
@@ -57,11 +68,11 @@ router.post('/entry', (req, res) => {
     for (let tag of req.body.moodWords) {
         tag = tag.toLowerCase()
     }
-    Log.create(req.body, (err, newLog) => {
+    Log.create(req.body, (err, createdLog) => {
         if (err) {
             console.log(err)
         } else {
-            console.log(newLog)
+            console.log(createdLog)
             res.redirect('/journal/dash')
         }
     })
@@ -72,6 +83,7 @@ router.get('/entry/:logId', (req, res) => {
     if (!req.session.currentUser) {
         res.redirect('/forbidden')
     } else {
+        const todayArr = kronos(Date.now()).toLocaleDateString('en-US').split('/')
         Log.findById(
             req.params.logId,
             (err, thisLog) => {
@@ -79,6 +91,7 @@ router.get('/entry/:logId', (req, res) => {
                     'pages/show.ejs',
                     {
                         log: thisLog,
+                        today: todayArr,
                         currentUser: req.session.currentUser
                     }
                 )
@@ -89,18 +102,24 @@ router.get('/entry/:logId', (req, res) => {
 
 // UPDATE PT 1 - EDIT - RESTFUL
 router.get('/entry/:logId/edit', (req, res) => {
-    Log.findById(
-        req.params.logId,
-        (err, thisLog) => {
-            res.render(
-                'pages/edit-log.ejs',
-                {
-                    log: thisLog,
-                    currentUser: req.session.currentUser
-                }
-            )
-        }
-    )
+    if (!req.session.currentUser) {
+        res.redirect('/forbidden')
+    } else {
+        const todayArr = kronos(Date.now()).toLocaleDateString('en-US').split('/')
+        Log.findById(
+            req.params.logId,
+            (err, thisLog) => {
+                res.render(
+                    'pages/edit-log.ejs',
+                    {
+                        log: thisLog,
+                        today: todayArr,
+                        currentUser: req.session.currentUser
+                    }
+                )
+            }
+        )
+    }
 })
 
 // UPDATE PT 2 - UPDATE - RESTFUL =================NEED TO CHECK ROUTE; PARSE REQ.BODY?
@@ -135,17 +154,33 @@ router.get('/dash', (req, res) => {
     if (!req.session.currentUser) {
         res.redirect('/forbidden')
     } else {
-        Log.find({}, (err, allLogs) => {
+        const todayArr = kronos(Date.now()).toLocaleDateString('en-US').split('/')
+        const thisMonth = todayArr[0]
+        const thisDate = todayArr[1]
+        const thisYear = todayArr[2]
+        Log.find(
+            {
+                username: req.session.currentUser.username,
+                monthCreated: thisMonth
+            },
+            (err, allLogs) => {
             Quote.find({}, (error, allQuotes) => {
                 res.render(
                     'pages/dashboard.ejs',
                     {
+                        // RANDOM INSPIRATIONAL QUOTE
                         quote: allQuotes[ Math.floor( Math.random() * allQuotes.length ) ],
-                        Log: Log,
+                        // THE CURRENT USER SESSION OBJECT
                         currentUser: req.session.currentUser,
+                        // ARRAY OF ALL LOGS
                         logs: allLogs,
-                        today: kronos().toLocaleDateString("en-US").split('/'),
-                        months: monthNameArr,
+                        // CURRENT DATE INFO
+                        today: todayArr,
+                        thisMonth: thisMonth,
+                        thisDate: thisDate,
+                        thisYear: thisYear,
+                        // ARRAY OF MONTH NAMES
+                        months: monthNameArr
                     }
                 )
             })

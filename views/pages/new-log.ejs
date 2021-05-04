@@ -12,8 +12,10 @@
             <form action="/journal/entry" method="POST">
                 <!-- HIDDEN username -->
                     <input type="hidden" name="username" value="<%= currentUser.username %>">
-                <!-- HIDDEN timestamp -->
-                    <input type="hidden" name="createdDate" value="<%= Date.now() %>">
+                <!-- HIDDEN dateCreated -->
+                    <input type="hidden" name="monthCreated" value="<%= date().toLocaleDateString("en-US").split('/')[0] %>">
+                    <input type="hidden" name="dateCreated" value="<%= date().toLocaleDateString("en-US").split('/')[1] %>">
+                    <input type="hidden" name="yearCreated" value="<%= date().toLocaleDateString("en-US").split('/')[2] %>">
                 <!-- title -->
                     <input class="input-textbox u-full-width" type="text" name="title" id="title-textbox" placeholder="Entry Title">
                 <!-- moodScale -->

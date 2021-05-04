@@ -7,7 +7,41 @@
 <body>
     <%- include('../partials/header.ejs') %>
     <div class="container">
-        <h1>Index</h1>
+        <div class="content-container">
+            <div class="dash-date">
+                <a class="button button-primary month-arrow" href=""><</a>
+                <h5><%= months[thisMonth] %> <%= thisYear %></h5>
+                <a class="button button-primary month-arrow" href="">></a>
+            </div>
+            <!-- THIS MONTH -->
+            <fieldset class="entry-list this-month">
+                <legend><h6>This Month's Entries</h6></legend>
+                <% if (logs.length === 0) { %>
+                    <p>You have no entries for <%= months[thisMonth] %> of <%= thisYear %></p>
+                <% } %>
+                <% for (let log of logs) { %>
+                    <div class="entry-container">
+                        <p class="log-title">
+                            <%= log.title %>
+                        </p>
+                        <p class="log-date">
+                            <%= months[log.monthCreated] %> <%= log.dateCreated %>, <%= log.yearCreated %>
+                        </p>
+                        <p class="mood-scale">
+                            <%= log.moodScale %>
+                        </p>
+                        <% for (let tag of moodWords) { %>
+                            <p class="mood-tag">
+                                <%= tag %>
+                            </p>
+                        <% } %>
+                        <p class="log-entry">
+                            <%= log.entry %>
+                        </p>
+                    </div>
+                <% } %>
+            </fieldset>
+        </div>
     </div>
     <%- include('../partials/footer.ejs') %>
 </body>
